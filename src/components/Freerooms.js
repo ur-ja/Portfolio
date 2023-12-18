@@ -7,11 +7,11 @@ export default function Freerooms() {
     window.open(targetUrl, '_blank');
   };
   return (
-    <div className='block bg-[#44009B] rounded-3xl'>
-      <img src='freerooms.png' className='h-full' />
+    <div className='block bg-[#44009B] rounded-3xl h-full'>
+      <img src='freerooms.png' className='h-full w-full' />
 
       <button
-        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 hover:p-3  hover:border-10 hover:border-yellow hover:border-opacity-50'
+        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'
         onClick={redirectToFreerooms}
       >
         <svg

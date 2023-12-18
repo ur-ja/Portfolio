@@ -7,11 +7,11 @@ export default function Github() {
     window.open(targetUrl, '_blank');
   };
   return (
-    <div className='bg-[#000000] rounded-3xl flex justify-center items-center'>
+    <div className='bg-[#000000] rounded-3xl flex justify-center items-center h-full w-full'>
       <img src='github.png' className='h-36' />
 
       <button
-        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 hover:p-3  hover:border-10 hover:border-yellow hover:border-opacity-50'
+        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'
         onClick={redirectToGithub}
       >
         <svg

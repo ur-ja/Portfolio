@@ -28,55 +28,55 @@ export default function Grid() {
   };
 
   const [gridLayout, setGridLayout] = useState({
-    div1: {
+    about: {
       mobile: { x: 0, y: 0, w: 5, h: 7 },
       tablet: { x: 0, y: 0, w: 10, h: 14 },
-      desktop: { x: 0, y: 0, w: 3, h: 6 },
+      desktop: { x: 0, y: 0, w: 5, h: 7 },
     },
-    div2: {
+    map: {
       mobile: { x: 5, y: 0, w: 5, h: 7 },
       tablet: { x: 0, y: 14, w: 10, h: 14 },
-      desktop: { x: 3, y: 0, w: 1.5, h: 6 },
+      desktop: { x: 5, y: 0, w: 2.5, h: 7 },
     },
-    div3: {
+    transpiler: {
       mobile: { x: 10, y: 0, w: 5, h: 7 },
       tablet: { x: 0, y: 28, w: 10, h: 9 },
-      desktop: { x: 4.5, y: 0, w: 2, h: 9 },
+      desktop: { x: 7.5, y: 0, w: 2.5, h: 13.5 },
     },
-    div4: {
+    linkedin: {
       mobile: { x: 0, y: 21, w: 5, h: 9 },
       tablet: { x: 0, y: 37, w: 5, h: 9 },
-      desktop: { x: 5, y: 21, w: 5, h: 9 },
+      desktop: { x: 0, y: 7, w: 2.5, h: 6.5 },
     },
-    div5: {
+    github: {
       mobile: { x: 0, y: 30, w: 5, h: 9 },
       tablet: { x: 5, y: 37, w: 5, h: 9 },
-      desktop: { x: 0, y: 30, w: 5, h: 9 },
+      desktop: { x: 2.5, y: 7, w: 2.5, h: 6.5 },
     },
-    div6: {
+    mentoring: {
       mobile: { x: 0, y: 39, w: 5, h: 9 },
       tablet: { x: 0, y: 46, w: 5, h: 9 },
-      desktop: { x: 0, y: 39, w: 5, h: 9 },
+      desktop: { x: 5, y: 7, w: 2.5, h: 13.5 },
     },
-    div7: {
+    freerooms: {
       mobile: { x: 0, y: 48, w: 5, h: 9 },
       tablet: { x: 0, y: 55, w: 5, h: 9 },
-      desktop: { x: 0, y: 48, w: 5, h: 9 },
+      desktop: { x: 0, y: 13.5, w: 5, h: 7 },
     },
-    div8: {
+    contact: {
       mobile: { x: 0, y: 57, w: 5, h: 9 },
       tablet: { x: 0, y: 64, w: 5, h: 9 },
-      desktop: { x: 0, y: 57, w: 5, h: 9 },
+      desktop: { x: 7.5, y: 13.5, w: 2.5, h: 7 },
     },
-    div9: {
+    seng: {
       mobile: { x: 0, y: 66, w: 5, h: 9 },
       tablet: { x: 0, y: 73, w: 5, h: 9 },
-      desktop: { x: 0, y: 66, w: 5, h: 9 },
+      desktop: { x: 0, y: 20.5, w: 5, h: 7 },
     },
-    div10: {
+    womenineng: {
       mobile: { x: 0, y: 75, w: 5, h: 9 },
       tablet: { x: 0, y: 82, w: 5, h: 9 },
-      desktop: { x: 0, y: 75, w: 5, h: 9 },
+      desktop: { x: 5, y: 20.5, w: 5, h: 7 },
     },
   });
 
@@ -104,6 +104,12 @@ export default function Grid() {
     setGridLayout((prevLayout) => ({ ...prevLayout, current: currentLayouts }));
   }, [screenSize]);
 
+  const redirectToTranspiler = () => {
+    const targetUrl = 'https://github.com/ur-ja/Transpiler/tree/main';
+
+    window.open(targetUrl, '_blank');
+  };
+
   return (
     <div className=''>
       <ResponsiveReactGridLayout
@@ -119,67 +125,71 @@ export default function Grid() {
         className='w-full space-y-1 md:space-y-0'
       >
         <div
-          key='div1'
-          data-grid={gridLayout.current && gridLayout.current['div1']}
+          key='about'
+          data-grid={gridLayout.current && gridLayout.current['about']}
           className='block bg-white rounded-3xl py-1 pl-6'
         >
           <About />
         </div>
         <div
-          key='div2'
-          data-grid={gridLayout.current && gridLayout.current['div2']}
+          key='map'
+          data-grid={gridLayout.current && gridLayout.current['map']}
           className='block bg-white rounded-3xl'
         >
           <Map />
         </div>
         <div
-          key='div3'
-          data-grid={gridLayout.current && gridLayout.current['div3']}
+          key='transpiler'
+          data-grid={gridLayout.current && gridLayout.current['transpiler']}
         >
           <Transpiler />
         </div>
         <div
-          key='div4'
-          data-grid={gridLayout.current && gridLayout.current['div4']}
+          key='linkedin'
+          data-grid={gridLayout.current && gridLayout.current['linkedin']}
         >
           <LinkedIn />
         </div>
         <div
-          key='div5'
-          data-grid={gridLayout.current && gridLayout.current['div5']}
+          key='github'
+          data-grid={gridLayout.current && gridLayout.current['github']}
         >
           <Github />
         </div>
         <div
-          key='div6'
-          data-grid={gridLayout.current && gridLayout.current['div6']}
+          key='mentoring'
+          data-grid={gridLayout.current && gridLayout.current['mentoring']}
         >
           <Mentoring />
         </div>
         <div
-          key='div7'
-          data-grid={gridLayout.current && gridLayout.current['div7']}
+          key='freerooms'
+          data-grid={gridLayout.current && gridLayout.current['freerooms']}
         >
           <Freerooms />
         </div>
         <div
-          key='div8'
-          data-grid={gridLayout.current && gridLayout.current['div8']}
+          key='contact'
+          data-grid={gridLayout.current && gridLayout.current['contact']}
         >
           <Contact />
         </div>
         <div
-          key='div9'
-          data-grid={gridLayout.current && gridLayout.current['div9']}
+          key='seng'
+          data-grid={gridLayout.current && gridLayout.current['seng']}
         >
           <Seng />
         </div>
         <div
-          key='div10'
-          data-grid={gridLayout.current && gridLayout.current['div10']}
+          key='womenineng'
+          data-grid={gridLayout.current && gridLayout.current['womenineng']}
         >
           <WomenInEng />
         </div>
+        <div
+          key='extra'
+          data-grid={gridLayout.current && gridLayout.current['extra']}
+        ></div>
       </ResponsiveReactGridLayout>
     </div>
   );

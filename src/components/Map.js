@@ -7,16 +7,16 @@ function Map() {
     setShowSydneyMap((prevShowSydneyMap) => !prevShowSydneyMap);
   };
   return (
-    <div>
+    <div className='h-full'>
       <button
-        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 hover:p-3  hover:border-10 hover:border-yellow hover:border-opacity-50'
+        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'
         onClick={toggleMap}
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 24 24'
           fill='currentColor'
-          class='w-4 h-4 rounded-full'
+          class='w-5 h-5 rounded-full'
         >
           <path
             fill-rule='evenodd'
