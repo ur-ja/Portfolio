@@ -9,7 +9,7 @@ export default function Seng() {
   return (
     <div className='flex flex-col bg-white rounded-3xl p-7 h-full w-full'>
       <button
-        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'
+        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125 border'
         onClick={redirectToSengAtUnsw}
       >
         <svg
