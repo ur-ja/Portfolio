@@ -27,7 +27,7 @@ export default function Cyber() {
           />
         </svg>
       </button>
-      <p className='text-sm text-gray-400 lg:mb-7'>September, 2023</p>
+      <p className='text-sm text-gray-400 lg:mb-7 mb-2'>September, 2023</p>
       <h1 className='text-2xl md:text-3xl font-bold mb-4'>
         Experimenting with Cyber Security
       </h1>

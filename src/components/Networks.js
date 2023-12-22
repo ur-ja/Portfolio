@@ -9,7 +9,12 @@ export default function Networks() {
   };
   return (
     <div className='bg-[#44009B] rounded-3xl h-full flex justify-center'>
-      <img src='networks.png' className='w-full h-full' />
+      <img src='networks.png' className='hidden md:block w-full h-full' />
+      <img
+        src='networks_mobile.png'
+        className='block md:hidden w-full h-full'
+        alt='Free Rooms'
+      />
 
       <button
         className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'

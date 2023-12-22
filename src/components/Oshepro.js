@@ -26,11 +26,11 @@ export default function Oshepro() {
           />
         </svg>
       </button>
-      <p className='text-sm text-gray-400 mb-6'>July, 2023</p>
-      <h1 className='text-4xl font-bold mb-6'>Oshepro</h1>
+      <p className='text-sm text-gray-400 lg:mb-6 mb-2'>July, 2023</p>
+      <h1 className='text-4xl font-bold lg:mb-6 mb-3'>Oshepro</h1>
       <p className=''>
         A look into my work as a UX designer for Oshepro, an EHS management
-        software. 
+        software.
       </p>
     </div>
   );

@@ -9,11 +9,11 @@ import About from './About';
 import Transpiler from './Transpiler';
 import LinkedIn from './LinkedIn';
 import Github from './Github';
-import Mentoring from './Cyber';
+import Cyber from './Cyber';
 import Contact from './Contact';
 import Freerooms from './Freerooms';
-import Seng from './Oshepro';
-import WomenInEng from './Networks';
+import Oshepro from './Oshepro';
+import Networks from './Networks';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -49,17 +49,17 @@ export default function Grid() {
       desktop: { x: 0, y: 7, w: 2.5, h: 6.5 },
     },
     github: {
-      mobile: { x: 0, y: 30, w: 5, h: 9 },
+      mobile: { x: 0, y: 30, w: 1, h: 4 },
       tablet: { x: 5, y: 37, w: 5, h: 9 },
       desktop: { x: 2.5, y: 7, w: 2.5, h: 6.5 },
     },
-    mentoring: {
+    cyber: {
       mobile: { x: 0, y: 39, w: 5, h: 9 },
       tablet: { x: 0, y: 46, w: 5, h: 9 },
       desktop: { x: 5, y: 7, w: 2.5, h: 13.5 },
     },
     freerooms: {
-      mobile: { x: 0, y: 48, w: 5, h: 9 },
+      mobile: { x: 0, y: 48, w: 1, h: 8 },
       tablet: { x: 0, y: 55, w: 5, h: 9 },
       desktop: { x: 0, y: 13.5, w: 5, h: 7 },
     },
@@ -68,13 +68,13 @@ export default function Grid() {
       tablet: { x: 0, y: 64, w: 5, h: 9 },
       desktop: { x: 7.5, y: 13.5, w: 2.5, h: 7 },
     },
-    seng: {
-      mobile: { x: 0, y: 66, w: 5, h: 9 },
+    oshepro: {
+      mobile: { x: 0, y: 66, w: 5, h: 5.5 },
       tablet: { x: 0, y: 73, w: 5, h: 9 },
       desktop: { x: 0, y: 20.5, w: 5, h: 7 },
     },
-    womenineng: {
-      mobile: { x: 0, y: 75, w: 5, h: 9 },
+    networks: {
+      mobile: { x: 1, y: 48, w: 1, h: 8 },
       tablet: { x: 0, y: 82, w: 5, h: 9 },
       desktop: { x: 5, y: 20.5, w: 5, h: 7 },
     },
@@ -160,11 +160,11 @@ export default function Grid() {
           <Github />
         </div>
         <div
-          key='mentoring'
-          data-grid={gridLayout.current && gridLayout.current['mentoring']}
+          key='cyber'
+          data-grid={gridLayout.current && gridLayout.current['cyber']}
           className='block bg-white rounded-3xl'
         >
-          <Mentoring />
+          <Cyber />
         </div>
         <div
           key='freerooms'
@@ -181,18 +181,18 @@ export default function Grid() {
           <Contact />
         </div>
         <div
-          key='seng'
-          data-grid={gridLayout.current && gridLayout.current['seng']}
+          key='oshepro'
+          data-grid={gridLayout.current && gridLayout.current['oshepro']}
           className='block bg-white rounded-3xl'
         >
-          <Seng />
+          <Oshepro />
         </div>
         <div
-          key='womenineng'
-          data-grid={gridLayout.current && gridLayout.current['womenineng']}
+          key='networks'
+          data-grid={gridLayout.current && gridLayout.current['networks']}
           className='block bg-white rounded-3xl'
         >
-          <WomenInEng />
+          <Networks />
         </div>
       </ResponsiveReactGridLayout>
     </div>
