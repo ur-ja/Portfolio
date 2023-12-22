@@ -9,11 +9,11 @@ import About from './About';
 import Transpiler from './Transpiler';
 import LinkedIn from './LinkedIn';
 import Github from './Github';
-import Mentoring from './Mentoring';
+import Mentoring from './Cyber';
 import Contact from './Contact';
 import Freerooms from './Freerooms';
-import Seng from './Seng';
-import WomenInEng from './WomenInEng';
+import Seng from './Oshepro';
+import WomenInEng from './Networks';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -34,17 +34,17 @@ export default function Grid() {
       desktop: { x: 0, y: 0, w: 5, h: 7 },
     },
     map: {
-      mobile: { x: 5, y: 0, w: 5, h: 7 },
+      mobile: { x: 5, y: 0, w: 5, h: 4 },
       tablet: { x: 0, y: 14, w: 10, h: 14 },
       desktop: { x: 5, y: 0, w: 2.5, h: 7 },
     },
     transpiler: {
-      mobile: { x: 10, y: 0, w: 5, h: 7 },
+      mobile: { x: 10, y: 0, w: 1, h: 8 },
       tablet: { x: 0, y: 28, w: 10, h: 9 },
       desktop: { x: 7.5, y: 0, w: 2.5, h: 13.5 },
     },
     linkedin: {
-      mobile: { x: 0, y: 21, w: 5, h: 9 },
+      mobile: { x: 0, y: 21, w: 1, h: 4 },
       tablet: { x: 0, y: 37, w: 5, h: 9 },
       desktop: { x: 0, y: 7, w: 2.5, h: 6.5 },
     },
@@ -141,55 +141,59 @@ export default function Grid() {
         <div
           key='transpiler'
           data-grid={gridLayout.current && gridLayout.current['transpiler']}
+          className='block bg-white rounded-3xl'
         >
           <Transpiler />
         </div>
         <div
           key='linkedin'
           data-grid={gridLayout.current && gridLayout.current['linkedin']}
+          className='block bg-white rounded-3xl'
         >
           <LinkedIn />
         </div>
         <div
           key='github'
           data-grid={gridLayout.current && gridLayout.current['github']}
+          className='block bg-white rounded-3xl'
         >
           <Github />
         </div>
         <div
           key='mentoring'
           data-grid={gridLayout.current && gridLayout.current['mentoring']}
+          className='block bg-white rounded-3xl'
         >
           <Mentoring />
         </div>
         <div
           key='freerooms'
           data-grid={gridLayout.current && gridLayout.current['freerooms']}
+          className='block bg-white rounded-3xl'
         >
           <Freerooms />
         </div>
         <div
           key='contact'
           data-grid={gridLayout.current && gridLayout.current['contact']}
+          className='block bg-white rounded-3xl'
         >
           <Contact />
         </div>
         <div
           key='seng'
           data-grid={gridLayout.current && gridLayout.current['seng']}
+          className='block bg-white rounded-3xl'
         >
           <Seng />
         </div>
         <div
           key='womenineng'
           data-grid={gridLayout.current && gridLayout.current['womenineng']}
+          className='block bg-white rounded-3xl'
         >
           <WomenInEng />
         </div>
-        <div
-          key='extra'
-          data-grid={gridLayout.current && gridLayout.current['extra']}
-        ></div>
       </ResponsiveReactGridLayout>
     </div>
   );

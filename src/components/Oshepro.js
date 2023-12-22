@@ -1,16 +1,15 @@
 import React from 'react';
 
-export default function Mentoring() {
-  const redirectToIndustryMentoringProgram = () => {
-    const targetUrl =
-      'https://medium.com/@urjaarora5/the-industry-mentoring-program-c2f2e41bb95e';
+export default function Oshepro() {
+  const redirectToOshepro = () => {
+    const targetUrl = 'https://medium.com/@urjaarora5/oshepro-da49cf442bb3';
     window.open(targetUrl, '_blank');
   };
   return (
     <div className='block bg-white rounded-3xl p-8 h-full w-full'>
       <button
         className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125 border'
-        onClick={redirectToIndustryMentoringProgram}
+        onClick={redirectToOshepro}
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -27,15 +26,11 @@ export default function Mentoring() {
           />
         </svg>
       </button>
-      <p className='text-sm text-gray-400 mb-6'>May, 2022</p>
-      <h1 className='text-4xl font-bold mb-6'>
-        The Industry Mentoring Program
-      </h1>
+      <p className='text-sm text-gray-400 mb-6'>July, 2023</p>
+      <h1 className='text-4xl font-bold mb-6'>Oshepro</h1>
       <p className=''>
-        Explore my journey through the CSESOCS Industry Mentoring Program at
-        Atlassian, where my mentor's guidance on resume building, interview
-        preparation, and job applications was instrumental in shaping my career
-        path.
+        A look into my work as a UX designer for Oshepro, an EHS management
+        software. 
       </p>
     </div>
   );
