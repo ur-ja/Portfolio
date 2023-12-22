@@ -13,7 +13,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='pt-10 mb-10'>
+    <div className='pt-10 mb-10 sm:bg-lime-400'>
       <NavBar />
       <div className='lg:mx-32 mt-12'>
         <Grid />

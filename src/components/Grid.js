@@ -64,7 +64,7 @@ export default function Grid() {
       desktop: { x: 0, y: 13.5, w: 5, h: 7 },
     },
     contact: {
-      mobile: { x: 0, y: 57, w: 5, h: 9 },
+      mobile: { x: 0, y: 57, w: 5, h: 5.5 },
       tablet: { x: 0, y: 64, w: 5, h: 9 },
       desktop: { x: 7.5, y: 13.5, w: 2.5, h: 7 },
     },
