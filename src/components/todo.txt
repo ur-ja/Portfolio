@@ -1,0 +1,6 @@
+1. Buttons dont work on mobile
+2. Scroll doesnt work on mobile 
+3. Text in images is blurred 
+4. tablet version doesnt work at all
+5. nav is weird on mobile (whole ui can be readjusted)
+5. no nav
