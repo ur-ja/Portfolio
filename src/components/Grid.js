@@ -104,14 +104,6 @@ export default function Grid() {
     setGridLayout((prevLayout) => ({ ...prevLayout, current: currentLayouts }));
   }, [screenSize]);
 
-  const handleBeforeCapture = (beforeCapture) => {
-    const clickedElement = beforeCapture.activeTouches[0]?.target;
-    if (clickedElement && clickedElement.tagName.toLowerCase() === 'button') {
-      return false; // Prevent dragging if the button was clicked
-    }
-    return true; // Allow dragging for other elements
-  };
-
   return (
     <div className=''>
       <ResponsiveReactGridLayout
@@ -125,7 +117,6 @@ export default function Grid() {
         droppingItem={{ i: 'xx', h: 50, w: 250 }}
         isResizable={false}
         className='w-full space-y-1 md:space-y-0'
-        onBeforeCapture={handleBeforeCapture}
       >
         <div
           key='about'
