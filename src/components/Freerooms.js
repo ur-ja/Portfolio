@@ -7,9 +7,6 @@ export default function Freerooms() {
     window.open(targetUrl, '_blank');
   };
 
-  const handleTouchStart = (e) => {
-    e.stopPropagation(); // Stop event propagation to prevent dragging
-  };
   return (
     <div className='bg-[#44009B] rounded-3xl h-full flex justify-center'>
       <img src='freerooms.png' className='hidden md:block w-full h-full' />
@@ -22,7 +19,6 @@ export default function Freerooms() {
       <button
         className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'
         onClick={redirectToFreerooms}
-        onTouchStart={handleTouchStart} // New: Apply touch event handler
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
