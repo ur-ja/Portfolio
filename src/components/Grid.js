@@ -18,7 +18,7 @@ import Networks from './Networks';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 export default function Grid() {
-  const [mounted, setmounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [compactType, setcompactType] = useState('vertical');
 
   const screenSize = {
@@ -92,7 +92,7 @@ export default function Grid() {
   };
 
   useEffect(() => {
-    setmounted(true);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -101,8 +101,13 @@ export default function Grid() {
       const currentDivLayout = gridLayout[div][getCurrentScreenSize()];
       currentLayouts[div] = currentDivLayout;
     });
-    setGridLayout((prevLayout) => ({ ...prevLayout, current: currentLayouts }));
-  }, [screenSize]);
+    if (JSON.stringify(gridLayout.current) !== JSON.stringify(currentLayouts)) {
+      setGridLayout((prevLayout) => ({
+        ...prevLayout,
+        current: currentLayouts,
+      }));
+    }
+  }, [gridLayout, getCurrentScreenSize]);
 
   return (
     <div className=''>
