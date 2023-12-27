@@ -24,6 +24,7 @@ export default function Grid() {
   const screenSize = {
     isMobile: useMediaQuery({ maxWidth: 767 }),
     isTablet: useMediaQuery({ minWidth: 768, maxWidth: 1024 }),
+    isCustom: useMediaQuery({ minWidth: 1025, maxWidth: 1252 }),
     isDesktop: useMediaQuery({ minWidth: 1025 }),
   };
 
@@ -31,51 +32,61 @@ export default function Grid() {
     about: {
       mobile: { x: 0, y: 0, w: 5, h: 7 },
       tablet: { x: 0, y: 0, w: 5, h: 7 },
+      custom: { x: 0, y: 0, w: 5, h: 7 },
       desktop: { x: 0, y: 0, w: 5, h: 7 },
     },
     map: {
       mobile: { x: 5, y: 0, w: 5, h: 4 },
       tablet: { x: 5, y: 0, w: 5, h: 5 },
+      custom: { x: 5, y: 0, w: 5, h: 5 },
       desktop: { x: 5, y: 0, w: 2.5, h: 7 },
     },
     transpiler: {
       mobile: { x: 10, y: 0, w: 1, h: 8 },
       tablet: { x: 7.5, y: 0, w: 1.5, h: 13.5 },
+      custom: { x: 7.5, y: 0, w: 1.5, h: 13.5 },
       desktop: { x: 7.5, y: 0, w: 2.5, h: 13.5 },
     },
     linkedin: {
       mobile: { x: 0, y: 21, w: 1, h: 4 },
       tablet: { x: 0, y: 7, w: 2.5, h: 6.5 },
+      custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
       desktop: { x: 0, y: 7, w: 2.5, h: 6.5 },
     },
     github: {
       mobile: { x: 0, y: 30, w: 1, h: 4 },
       tablet: { x: 2.5, y: 7, w: 1.5, h: 6.5 },
+      custom: { x: 2.5, y: 7, w: 1.5, h: 6.5 },
       desktop: { x: 2.5, y: 7, w: 2.5, h: 6.5 },
     },
     cyber: {
       mobile: { x: 0, y: 39, w: 5, h: 9 },
       tablet: { x: 0, y: 20, w: 5, h: 7 },
+      custom: { x: 0, y: 20, w: 5, h: 7 },
       desktop: { x: 5, y: 7, w: 2.5, h: 13.5 },
     },
     freerooms: {
       mobile: { x: 0, y: 48, w: 1, h: 8 },
       tablet: { x: 0, y: 7, w: 2.5, h: 6.5 },
+      custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
       desktop: { x: 0, y: 13.5, w: 5, h: 7 },
     },
     contact: {
       mobile: { x: 0, y: 66, w: 5, h: 5.5 },
       tablet: { x: 5, y: 7, w: 1.5, h: 7 },
+      custom: { x: 5, y: 7, w: 1.5, h: 7 },
       desktop: { x: 7.5, y: 13.5, w: 2.5, h: 7 },
     },
     oshepro: {
       mobile: { x: 0, y: 57, w: 5, h: 5.5 },
       tablet: { x: 0, y: 7, w: 2.5, h: 7 },
+      custom: { x: 0, y: 7, w: 2.5, h: 7 },
       desktop: { x: 0, y: 20.5, w: 5, h: 7 },
     },
     networks: {
       mobile: { x: 1, y: 48, w: 1, h: 8 },
       tablet: { x: 0, y: 7, w: 2.5, h: 7 },
+      custom: { x: 0, y: 7, w: 2.5, h: 7 },
       desktop: { x: 5, y: 20.5, w: 5, h: 7 },
     },
   });
@@ -85,6 +96,8 @@ export default function Grid() {
       return 'mobile';
     } else if (screenSize.isTablet) {
       return 'tablet';
+    } else if (screenSize.isCustom) {
+      return 'custom';
     } else if (screenSize.isDesktop) {
       return 'desktop';
     }
@@ -110,7 +123,7 @@ export default function Grid() {
   }, [gridLayout, getCurrentScreenSize]);
 
   return (
-    <div className=''>
+    <div className='lg:w-[70rem] md:w-[40rem] w-[20rem] custom:w-[40rem]'>
       <ResponsiveReactGridLayout
         rowHeight={30}
         layout={gridLayout}
@@ -120,6 +133,7 @@ export default function Grid() {
         preventCollision={!compactType}
         isDroppable={true}
         droppingItem={{ i: 'xx', h: 50, w: 250 }}
+        isDraggable={screenSize.isTablet || screenSize.isMobile ? false : true} // Disable drag for tablet and mobile
         isResizable={false}
         className='w-full space-y-1 md:space-y-0'
       >

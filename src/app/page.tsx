@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className='pt-10 mb-10'>
       <NavBar />
-      <div className='lg:mx-32 mt-5'>
+      <div className='lg:mx-32 mt-5 flex justify-center align-middle items-center'>
         <Grid />
       </div>
       <div>

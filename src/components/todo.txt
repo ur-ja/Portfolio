@@ -1,7 +1,7 @@
 IMP
 [ ] Buttons dont work on mobile (drag drop off on mobile)
 [ ] Scroll doesnt work on mobile (drag drop off on mobile)
-[ ] on ipad doesnt work at all (change width of container (different for different screen sizes))
+[x] on ipad doesnt work at all (change width of container (different for different screen sizes))
 [x] logo blurred (use svgs for all images)
 
 
