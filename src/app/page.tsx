@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
-  const isLaptop = window.innerWidth > 1024; // Set a breakpoint for laptop width
+  const isLaptop = window.innerWidth >= 1024; // Set a breakpoint for laptop width
 
   const notify = () => {
     if (isLaptop) {
