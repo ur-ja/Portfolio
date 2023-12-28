@@ -3,7 +3,7 @@ IMP
 [x] Scroll doesnt work on mobile (drag drop off on mobile)
 [x] on ipad doesnt work at all (change width of container (different for different screen sizes))
 [x] logo blurred (use svgs for all images)
-[ ] disable pop up on smaller screens
+[x] disable pop up on smaller screens
 
 
 EXTRA
