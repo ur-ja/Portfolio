@@ -6,13 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
-  const isLaptop = window.innerWidth >= 1024; // Set a breakpoint for laptop width
-
-  const notify = () => {
-    if (isLaptop) {
-      toast('Try to drag and drop the elements!');
-    }
-  };
+  const notify = () => toast('Try to drag and drop the elements!');
 
   useEffect(() => {
     notify();
@@ -24,9 +18,9 @@ export default function Home() {
       <div className='lg:mx-32 mt-5 flex justify-center align-middle items-center'>
         <Grid />
       </div>
-      <div>
+      <div className='hidden lg:block'>
         <button onClick={notify}></button>
-        {isLaptop && <ToastContainer />}{' '}
+        <ToastContainer />
       </div>
       <div className='flex justify-center items-center'>
         <p className='text-sm text-gray-300 font-extralight'>designed by nev</p>
