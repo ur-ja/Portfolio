@@ -11,7 +11,7 @@ import LinkedIn from './LinkedIn';
 import Github from './Github';
 import Thesis from './Thesis';
 import Contact from './Contact';
-import DevSoc from './DevSoc';
+import Devsoc from './Devsoc';
 import Oshepro from './Oshepro';
 import AIIndex from './AIIndex';
 
@@ -224,7 +224,7 @@ export default function Grid() {
         </div>
 
         <div key='devsoc' data-grid={scaledCurrent && scaledCurrent['devsoc']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
-          <DevSoc />
+          <Devsoc />
         </div>
 
         <div key='contact' data-grid={scaledCurrent && scaledCurrent['contact']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>

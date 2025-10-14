@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function DevSoc() {
+export default function Devsoc() {
     const redirectToDevSoc = () => {
     const targetUrl = 'https://resolute-jam-a6f.notion.site/Software-Development-Society-DevSoc-UNSW-Sydney-28c5f9b148b980149954c4deb148cc47?source=copy_link';
 
