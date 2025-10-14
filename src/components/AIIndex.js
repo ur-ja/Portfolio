@@ -37,10 +37,11 @@ export default function AIIndex() {
       </h1>
 
       <p className='text-sm sm:text-base lg:text-lg leading-relaxed'>
-        Contributing to the first national AI Index as a Research Assistant at UNSW,
-        in collaboration with Stanford’s AI Index team — developing data pipelines
-        and an interactive dashboard to map Australia’s AI landscape.
-      </p>
+      Contributing to the first AI Index in Australia as a Research Assistant at UNSW,
+      complementing Stanford’s AI Index by developing data pipelines and an interactive
+      dashboard to map Australia’s AI landscape.
+    </p>
+
     </div>
   );
 }
