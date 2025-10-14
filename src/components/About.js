@@ -31,13 +31,14 @@ export default function About() {
         alt='Company Logo'
         className={`h-20 md:h-32 ${imageIndex === 0 ? 'fade-in' : 'fade-out'}`}
       />
-      <p className='p-4 font-poppins font-light'>
+      <p className='p-4 font-poppins font-light md:text-md text-sm'>
         Hi! I'm{' '}
-        <span className='mx-1 text-2xl md:text-2xl font-extrabold'>urja</span>,
-        a software engineering student at UNSW. I'm passionate about technology,
-        and design. I enjoy building products that make a difference in people's
-        lives.
+        <span className='mx-1 text-lg md:text-2xl font-extrabold'>urja</span>, 
+        a Research Assistant at UNSW exploring how data, technology, and design can 
+        drive meaningful change. I love turning complex problems into simple, elegant 
+        products that make a difference in people’s lives.
       </p>
+
     </div>
   );
 }

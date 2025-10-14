@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { useMediaQuery } from 'react-responsive';
 import 'react-grid-layout/css/styles.css';
@@ -6,20 +6,20 @@ import 'react-resizable/css/styles.css';
 import '../app/style.css';
 import Map from './Map';
 import About from './About';
-import Transpiler from './Transpiler';
+import VVDN from './VVDN';
 import LinkedIn from './LinkedIn';
 import Github from './Github';
-import Cyber from './Cyber';
+import Thesis from './Thesis';
 import Contact from './Contact';
-import Freerooms from './Freerooms';
+import DevSoc from './DevSoc';
 import Oshepro from './Oshepro';
-import Networks from './Networks';
+import AIIndex from './AIIndex';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 export default function Grid() {
   const [mounted, setMounted] = useState(false);
-  const [compactType, setcompactType] = useState('vertical');
+  const [compactType] = useState('vertical');
 
   const screenSize = {
     isMobile: useMediaQuery({ maxWidth: 767 }),
@@ -30,77 +30,73 @@ export default function Grid() {
 
   const [gridLayout, setGridLayout] = useState({
     about: {
-      mobile: { x: 0, y: 0, w: 5, h: 7 },
-      tablet: { x: 0, y: 0, w: 5, h: 7 },
+      mobile: { x: 0, y: 0, w: 10, h: 6 },
+      tablet: { x: 0, y: 0, w: 10, h: 6 },
       custom: { x: 0, y: 0, w: 5, h: 7 },
-      desktop: { x: 0, y: 0, w: 5, h: 7 },
+      desktop: { x: 0, y: 0, w: 6, h: 6 },
     },
     map: {
-      mobile: { x: 5, y: 0, w: 5, h: 4 },
-      tablet: { x: 5, y: 0, w: 5, h: 5 },
+      mobile: { x: 0, y: 6, w: 10, h: 3 },
+      tablet: { x: 0, y: 7, w: 10, h: 4 },
       custom: { x: 5, y: 0, w: 5, h: 5 },
-      desktop: { x: 5, y: 0, w: 2.5, h: 7 },
+      desktop: { x: 6, y: 0, w: 3, h: 6 },
     },
-    transpiler: {
-      mobile: { x: 10, y: 0, w: 1, h: 8 },
-      tablet: { x: 7.5, y: 0, w: 1.5, h: 13.5 },
+    vvdn: {
+      mobile: { x: 5, y: 9, w: 5, h: 7 },
+      tablet: { x: 6, y: 7, w: 4, h: 10 },
       custom: { x: 7.5, y: 0, w: 1.5, h: 13.5 },
-      desktop: { x: 7.5, y: 0, w: 2.5, h: 13.5 },
+      desktop: { x: 9, y: 0, w: 3, h: 11.5 },
     },
     linkedin: {
-      mobile: { x: 0, y: 21, w: 1, h: 4 },
-      tablet: { x: 0, y: 7, w: 2.5, h: 6.5 },
+      mobile: { x: 0, y: 9, w: 5, h: 3.5 },
+      tablet: { x: 0, y: 7, w: 6, h: 5 },
       custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
-      desktop: { x: 0, y: 7, w: 2.5, h: 6.5 },
+      desktop: { x: 0, y: 7, w: 3, h: 6 },
     },
     github: {
-      mobile: { x: 0, y: 30, w: 1, h: 4 },
-      tablet: { x: 2.5, y: 7, w: 1.5, h: 6.5 },
+      mobile: { x: 0, y: 12.5, w: 5, h: 3.5 },
+      tablet: { x: 6, y: 19, w: 4, h: 7 },
       custom: { x: 2.5, y: 7, w: 1.5, h: 6.5 },
-      desktop: { x: 2.5, y: 7, w: 2.5, h: 6.5 },
+      desktop: { x: 3, y: 7, w: 3, h: 6 },
     },
-    cyber: {
-      mobile: { x: 0, y: 39, w: 5, h: 9 },
-      tablet: { x: 0, y: 20, w: 5, h: 7 },
+    thesis: {
+      mobile: { x: 0, y: 28, w: 10, h: 6 },
+      tablet: { x: 0, y: 31, w: 10, h: 5 },
       custom: { x: 0, y: 20, w: 5, h: 7 },
-      desktop: { x: 5, y: 7, w: 2.5, h: 13.5 },
+      desktop: { x: 6, y: 7, w: 3, h: 11.5 },
     },
-    freerooms: {
-      mobile: { x: 0, y: 48, w: 1, h: 8 },
-      tablet: { x: 0, y: 7, w: 2.5, h: 6.5 },
+    devsoc: {
+      mobile: { x: 0, y: 21, w: 5, h: 7 },
+      tablet: { x: 0, y: 13, w: 6, h: 5 },
       custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
-      desktop: { x: 0, y: 13.5, w: 5, h: 7 },
+      desktop: { x: 0, y: 13.5, w: 6, h: 5.5 },
     },
     contact: {
-      mobile: { x: 0, y: 66, w: 5, h: 5.5 },
-      tablet: { x: 5, y: 7, w: 1.5, h: 7 },
+      mobile: { x: 6, y: 34, w: 10, h: 5 },
+      tablet: { x: 6, y: 25, w: 4, h: 5 },
       custom: { x: 5, y: 7, w: 1.5, h: 7 },
-      desktop: { x: 7.5, y: 13.5, w: 2.5, h: 7 },
+      desktop: { x: 9, y: 11.5, w: 3, h: 6 },
+    },
+    aiindex: {
+      mobile: { x: 0, y: 16, w: 10, h: 5 },
+      tablet: { x: 0, y: 19, w: 6, h: 7 },
+      custom: { x: 0, y: 7, w: 2.5, h: 7 },
+      desktop: { x: 0, y: 20.5, w: 6, h: 5.5 },
     },
     oshepro: {
-      mobile: { x: 0, y: 57, w: 5, h: 5.5 },
-      tablet: { x: 0, y: 7, w: 2.5, h: 7 },
+      mobile: { x: 5, y: 21, w: 5, h: 7 },
+      tablet: { x: 0, y: 25, w: 6, h: 5 },
       custom: { x: 0, y: 7, w: 2.5, h: 7 },
-      desktop: { x: 0, y: 20.5, w: 5, h: 7 },
-    },
-    networks: {
-      mobile: { x: 1, y: 48, w: 1, h: 8 },
-      tablet: { x: 0, y: 7, w: 2.5, h: 7 },
-      custom: { x: 0, y: 7, w: 2.5, h: 7 },
-      desktop: { x: 5, y: 20.5, w: 5, h: 7 },
+      desktop: { x: 6, y: 20.5, w: 6, h: 5.5 },
     },
   });
 
+  // helper to get current breakpoint name
   const getCurrentScreenSize = () => {
-    if (screenSize.isMobile) {
-      return 'mobile';
-    } else if (screenSize.isTablet) {
-      return 'tablet';
-    } else if (screenSize.isCustom) {
-      return 'custom';
-    } else if (screenSize.isDesktop) {
-      return 'desktop';
-    }
+    if (screenSize.isMobile) return 'mobile';
+    if (screenSize.isTablet) return 'tablet';
+    if (screenSize.isCustom) return 'custom';
+    if (screenSize.isDesktop) return 'desktop';
     return 'desktop';
   };
 
@@ -108,6 +104,7 @@ export default function Grid() {
     setMounted(true);
   }, []);
 
+  // keep a current snapshot (unscaled) similar to your original pattern
   useEffect(() => {
     const currentLayouts = {};
     Object.keys(gridLayout).forEach((div) => {
@@ -120,92 +117,126 @@ export default function Grid() {
         current: currentLayouts,
       }));
     }
-  }, [gridLayout, getCurrentScreenSize]);
+    // note: intentionally only depends on screenSize booleans so it updates when the screen breakpoint changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenSize.isMobile, screenSize.isTablet, screenSize.isCustom, screenSize.isDesktop]);
+
+  // SCALE FACTOR — converts halves (2.5/7.5/13.5) into integers
+  const SCALE = 2;
+
+  // Build layouts object (breakpointName -> array of items) while scaling values to integers
+  const layouts = useMemo(() => {
+    const breakpoints = ['mobile', 'tablet', 'custom', 'desktop'];
+    const out = {};
+    breakpoints.forEach((bp) => {
+      out[bp] = Object.keys(gridLayout)
+        .filter((k) => k !== 'current')
+        .map((key) => {
+          const item = gridLayout[key][bp] || gridLayout[key].desktop;
+          // scale x, y, w, h by SCALE and round (ensures integers)
+          const scaled = {
+            i: key,
+            x: Math.round(item.x * SCALE),
+            y: Math.round(item.y * SCALE),
+            w: Math.max(1, Math.round(item.w * SCALE)),
+            h: Math.max(1, Math.round(item.h * SCALE)),
+          };
+          return scaled;
+        });
+    });
+    return out;
+  }, [gridLayout]);
+
+  // Scaled current for data-grid on each child so both sources match
+  // defend against missing gridLayout.current entries during rapid resizes
+  const scaledCurrent = useMemo(() => {
+    const out = {};
+    const breakpoint = getCurrentScreenSize();
+
+    Object.keys(gridLayout)
+      .filter((k) => k !== 'current')
+      .forEach((k) => {
+        // Prefer the computed current entry if present, otherwise fall back to the per-breakpoint entry
+        const maybeCurrent = gridLayout.current && gridLayout.current[k];
+        const fallbackPerBp = gridLayout[k] && gridLayout[k][breakpoint];
+        const fallbackDesktop = gridLayout[k] && gridLayout[k].desktop;
+        const it = maybeCurrent || fallbackPerBp || fallbackDesktop || { x: 0, y: 0, w: 1, h: 1 };
+
+        out[k] = {
+          x: Math.round((it.x ?? 0) * SCALE),
+          y: Math.round((it.y ?? 0) * SCALE),
+          w: Math.max(1, Math.round((it.w ?? 1) * SCALE)),
+          h: Math.max(1, Math.round((it.h ?? 1) * SCALE)),
+          i: k,
+        };
+      });
+
+    return out;
+    // recalc when gridLayout.current or breakpoint booleans change
+  }, [gridLayout, gridLayout.current, screenSize.isMobile, screenSize.isTablet, screenSize.isCustom, screenSize.isDesktop]);
+
+  // Columns per breakpoint must match the scaling (originally maybe 10/10/12/12 — double to 20/20/24/24)
+  const cols = { mobile: 20, tablet: 20, custom: 24, desktop: 24 };
+
+  // breakpoints mapping (pixel widths). Adjust if you want different breakpoints.
+  const breakpoints = { mobile: 0, tablet: 768, custom: 1025, desktop: 1253 };
 
   return (
     <div className='lg:w-[70rem] md:w-[40rem] w-[20rem] custom:w-[40rem]'>
       <ResponsiveReactGridLayout
-        rowHeight={30}
-        layout={gridLayout}
+        layouts={layouts}
+        breakpoints={breakpoints}
+        cols={cols}
+        rowHeight={15} // rowHeight halved because we've doubled grid units (keeps visual height similar)
         measureBeforeMount={false}
         useCSSTransforms={mounted}
         compactType={compactType}
         preventCollision={!compactType}
         isDroppable={true}
-        droppingItem={{ i: 'xx', h: 50, w: 250 }}
-        isDraggable={screenSize.isTablet || screenSize.isMobile ? false : true} // Disable drag for tablet and mobile
+        droppingItem={{ i: 'xx', h: Math.round(50 * SCALE), w: Math.round((250 / 10) * SCALE) }}
+        isDraggable={screenSize.isTablet || screenSize.isMobile ? false : true}
+        draggableCancel={'a, button, [role="button"], .no-drag'}
         isResizable={false}
         className='w-full space-y-1 md:space-y-0'
       >
-        <div
-          key='about'
-          data-grid={gridLayout.current && gridLayout.current['about']}
-          className='block bg-white rounded-3xl py-1 pl-6'
-        >
+        <div key='about' data-grid={scaledCurrent && scaledCurrent['about']} className='block bg-white rounded-3xl py-1 pl-6 shadow-none ring-1 ring-black/5'>
           <About />
         </div>
-        <div
-          key='map'
-          data-grid={gridLayout.current && gridLayout.current['map']}
-          className='block bg-white rounded-3xl'
-        >
+
+        <div key='map' data-grid={scaledCurrent && scaledCurrent['map']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <Map />
         </div>
-        <div
-          key='transpiler'
-          data-grid={gridLayout.current && gridLayout.current['transpiler']}
-          className='block bg-white rounded-3xl'
-        >
-          <Transpiler />
+
+        <div key='vvdn' data-grid={scaledCurrent && scaledCurrent['vvdn']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <VVDN />
         </div>
-        <div
-          key='linkedin'
-          data-grid={gridLayout.current && gridLayout.current['linkedin']}
-          className='block bg-white rounded-3xl'
-        >
+
+        <div key='linkedin' data-grid={scaledCurrent && scaledCurrent['linkedin']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <LinkedIn />
         </div>
-        <div
-          key='github'
-          data-grid={gridLayout.current && gridLayout.current['github']}
-          className='block bg-white rounded-3xl'
-        >
+
+        <div key='github' data-grid={scaledCurrent && scaledCurrent['github']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <Github />
         </div>
-        <div
-          key='cyber'
-          data-grid={gridLayout.current && gridLayout.current['cyber']}
-          className='block bg-white rounded-3xl'
-        >
-          <Cyber />
+
+        <div key='thesis' data-grid={scaledCurrent && scaledCurrent['thesis']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <Thesis />
         </div>
-        <div
-          key='freerooms'
-          data-grid={gridLayout.current && gridLayout.current['freerooms']}
-          className='block bg-white rounded-3xl'
-        >
-          <Freerooms />
+
+        <div key='devsoc' data-grid={scaledCurrent && scaledCurrent['devsoc']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <DevSoc />
         </div>
-        <div
-          key='contact'
-          data-grid={gridLayout.current && gridLayout.current['contact']}
-          className='block bg-white rounded-3xl'
-        >
+
+        <div key='contact' data-grid={scaledCurrent && scaledCurrent['contact']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <Contact />
         </div>
-        <div
-          key='oshepro'
-          data-grid={gridLayout.current && gridLayout.current['oshepro']}
-          className='block bg-white rounded-3xl'
-        >
-          <Oshepro />
+
+        <div key='aiindex' data-grid={scaledCurrent && scaledCurrent['aiindex']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <AIIndex />
         </div>
-        <div
-          key='networks'
-          data-grid={gridLayout.current && gridLayout.current['networks']}
-          className='block bg-white rounded-3xl'
-        >
-          <Networks />
+
+        <div key='oshepro' data-grid={scaledCurrent && scaledCurrent['oshepro']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <Oshepro />
         </div>
       </ResponsiveReactGridLayout>
     </div>

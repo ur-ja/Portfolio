@@ -3,3 +3,13 @@
   border-radius: 30px;
   /* transition: box-shadow 0.3s ease-in-out; */
 }
+
+/* Make the dragged item's shadow very light */
+.react-grid-item.react-draggable-dragging {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Lighten the placeholder appearance while dragging */
+.react-grid-item.react-grid-placeholder {
+  background-color: rgba(0, 0, 0, 0.05);
+}
