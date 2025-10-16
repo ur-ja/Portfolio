@@ -28,7 +28,7 @@ export default function About() {
       </button>
       <img
         src={images[imageIndex]}
-        alt='Company Logo'
+        alt='Memoji'
         className={`h-20 md:h-32 ${imageIndex === 0 ? 'fade-in' : 'fade-out'}`}
       />
       <p className='p-4 font-poppins font-light md:text-md text-sm'>

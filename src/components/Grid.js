@@ -14,6 +14,7 @@ import Contact from './Contact';
 import Devsoc from './Devsoc';
 import Oshepro from './Oshepro';
 import AIIndex from './AIIndex';
+import Resume from './Resume';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -89,6 +90,13 @@ export default function Grid() {
       custom: { x: 0, y: 7, w: 2.5, h: 7 },
       desktop: { x: 6, y: 20.5, w: 6, h: 5.5 },
     },
+    resume: {
+      // mobile only
+      mobile: { x: 0, y: 40, w: 10, h: 5 },
+      tablet: { x: 0, y: 40, w: 0, h: 0 },
+      custom: { x: 0, y: 40, w: 0, h: 0 },
+      desktop: { x: 0, y: 40, w: 0, h: 0 },
+    },
   });
 
   // helper to get current breakpoint name
@@ -104,7 +112,6 @@ export default function Grid() {
     setMounted(true);
   }, []);
 
-  // keep a current snapshot (unscaled) similar to your original pattern
   useEffect(() => {
     const currentLayouts = {};
     Object.keys(gridLayout).forEach((div) => {
@@ -117,14 +124,10 @@ export default function Grid() {
         current: currentLayouts,
       }));
     }
-    // note: intentionally only depends on screenSize booleans so it updates when the screen breakpoint changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenSize.isMobile, screenSize.isTablet, screenSize.isCustom, screenSize.isDesktop]);
 
-  // SCALE FACTOR — converts halves (2.5/7.5/13.5) into integers
   const SCALE = 2;
 
-  // Build layouts object (breakpointName -> array of items) while scaling values to integers
   const layouts = useMemo(() => {
     const breakpoints = ['mobile', 'tablet', 'custom', 'desktop'];
     const out = {};
@@ -133,22 +136,18 @@ export default function Grid() {
         .filter((k) => k !== 'current')
         .map((key) => {
           const item = gridLayout[key][bp] || gridLayout[key].desktop;
-          // scale x, y, w, h by SCALE and round (ensures integers)
-          const scaled = {
+          return {
             i: key,
             x: Math.round(item.x * SCALE),
             y: Math.round(item.y * SCALE),
             w: Math.max(1, Math.round(item.w * SCALE)),
             h: Math.max(1, Math.round(item.h * SCALE)),
           };
-          return scaled;
         });
     });
     return out;
   }, [gridLayout]);
 
-  // Scaled current for data-grid on each child so both sources match
-  // defend against missing gridLayout.current entries during rapid resizes
   const scaledCurrent = useMemo(() => {
     const out = {};
     const breakpoint = getCurrentScreenSize();
@@ -156,7 +155,6 @@ export default function Grid() {
     Object.keys(gridLayout)
       .filter((k) => k !== 'current')
       .forEach((k) => {
-        // Prefer the computed current entry if present, otherwise fall back to the per-breakpoint entry
         const maybeCurrent = gridLayout.current && gridLayout.current[k];
         const fallbackPerBp = gridLayout[k] && gridLayout[k][breakpoint];
         const fallbackDesktop = gridLayout[k] && gridLayout[k].desktop;
@@ -172,13 +170,9 @@ export default function Grid() {
       });
 
     return out;
-    // recalc when gridLayout.current or breakpoint booleans change
   }, [gridLayout, gridLayout.current, screenSize.isMobile, screenSize.isTablet, screenSize.isCustom, screenSize.isDesktop]);
 
-  // Columns per breakpoint must match the scaling (originally maybe 10/10/12/12 — double to 20/20/24/24)
   const cols = { mobile: 20, tablet: 20, custom: 24, desktop: 24 };
-
-  // breakpoints mapping (pixel widths). Adjust if you want different breakpoints.
   const breakpoints = { mobile: 0, tablet: 768, custom: 1025, desktop: 1253 };
 
   return (
@@ -187,7 +181,7 @@ export default function Grid() {
         layouts={layouts}
         breakpoints={breakpoints}
         cols={cols}
-        rowHeight={15} // rowHeight halved because we've doubled grid units (keeps visual height similar)
+        rowHeight={15}
         measureBeforeMount={false}
         useCSSTransforms={mounted}
         compactType={compactType}
@@ -238,6 +232,16 @@ export default function Grid() {
         <div key='oshepro' data-grid={scaledCurrent && scaledCurrent['oshepro']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <Oshepro />
         </div>
+
+        {screenSize.isMobile && (
+          <div
+          key='resume'
+          data-grid={scaledCurrent && scaledCurrent['resume']}
+          className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'
+        >
+          <Resume />
+        </div>
+        )}
       </ResponsiveReactGridLayout>
     </div>
   );
