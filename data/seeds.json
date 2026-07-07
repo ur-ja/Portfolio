@@ -1,0 +1,22 @@
+{
+  "seeds": [
+    {
+      "id": "demo-sprout",
+      "title": "an idea garden",
+      "gardener": "anonymous gardener",
+      "waters": 6,
+      "bloomed": true,
+      "x": 82,
+      "plantedAt": "2026-03-01T00:00:00.000Z"
+    },
+    {
+      "id": "b259fef8-02ee-4fb1-a46b-41fc6a0cab3e",
+      "title": "hjfhjfhj",
+      "gardener": "anonymous gardener",
+      "waters": 3,
+      "bloomed": false,
+      "x": 48,
+      "plantedAt": "2026-07-07T13:11:40.216Z"
+    }
+  ]
+}

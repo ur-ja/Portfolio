@@ -14,13 +14,103 @@ import Contact from './Contact';
 import Devsoc from './Devsoc';
 import Oshepro from './Oshepro';
 import AIIndex from './AIIndex';
+import Whereabouts from './Whereabouts';
+import Seeds from './Seeds';
 import Resume from './Resume';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
+const SCALE = 2;
+
+const DEFAULT_GRID_LAYOUT = {
+  about: {
+    mobile: { x: 0, y: 0, w: 10, h: 6 },
+    tablet: { x: 0, y: 0, w: 10, h: 6 },
+    custom: { x: 0, y: 0, w: 5, h: 7 },
+    desktop: { x: 0, y: 0, w: 6, h: 6 },
+  },
+  map: {
+    mobile: { x: 0, y: 6, w: 10, h: 3 },
+    tablet: { x: 0, y: 7, w: 5, h: 5 },
+    custom: { x: 5, y: 0, w: 5, h: 5 },
+    desktop: { x: 6, y: 0, w: 3, h: 6 },
+  },
+  vvdn: {
+    mobile: { x: 5, y: 9, w: 5, h: 7 },
+    tablet: { x: 5, y: 7, w: 5, h: 10 },
+    custom: { x: 7.5, y: 0, w: 1.5, h: 13.5 },
+    desktop: { x: 9, y: 0, w: 3, h: 12 },
+  },
+  linkedin: {
+    mobile: { x: 0, y: 9, w: 5, h: 3.5 },
+    tablet: { x: 0, y: 8, w: 5, h: 5 },
+    custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
+    desktop: { x: 0, y: 7, w: 3, h: 6 },
+  },
+  github: {
+    mobile: { x: 0, y: 12.5, w: 5, h: 3.5 },
+    tablet: { x: 0, y: 13, w: 5, h: 5 },
+    custom: { x: 2.5, y: 7, w: 1.5, h: 6.5 },
+    desktop: { x: 3, y: 7, w: 3, h: 6 },
+  },
+  thesis: {
+    mobile: { x: 0, y: 28, w: 10, h: 6 },
+    tablet: { x: 0, y: 31, w: 10, h: 5 },
+    custom: { x: 0, y: 20, w: 5, h: 7 },
+    desktop: { x: 6, y: 7, w: 3, h: 11.5 },
+  },
+  whereabouts: {
+    mobile: { x: 0, y: 34, w: 10, h: 5 },
+    tablet: { x: 0, y: 24, w: 10, h: 5.5 },
+    custom: { x: 0, y: 27, w: 2.5, h: 6.5 },
+    desktop: { x: 0, y: 26, w: 6, h: 5.5 },
+  },
+  devsoc: {
+    mobile: { x: 0, y: 21, w: 5, h: 7 },
+    tablet: { x: 6, y: 19, w: 10, h: 5.5 },
+    custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
+    desktop: { x: 0, y: 13.5, w: 6, h: 5.5 },
+  },
+  contact: {
+    mobile: { x: 0, y: 39, w: 10, h: 5 },
+    tablet: { x:  5, y: 7, w: 5, h: 5 },
+    custom: { x: 5, y: 7, w: 1.5, h: 7 },
+    desktop: { x: 9, y: 11.5, w: 3, h: 5.5 },
+  },
+  seeds: {
+    mobile: { x: 5, y: 34,w: 10, h: 6 },
+    tablet: { x: 5, y: 24, w: 10, h: 5.5 },
+    custom: { x: 2.5, y: 27, w: 2.5, h: 6.5 },
+    desktop: { x: 6, y: 26, w: 6, h: 5.5 },
+  },
+  aiindex: {
+    mobile: { x: 0, y: 16, w: 10, h: 5 },
+    tablet: { x: 0, y: 19, w: 10, h: 5.5 },
+    custom: { x: 0, y: 7, w: 2.5, h: 7 },
+    desktop: { x: 0, y: 20.5, w: 6, h: 5.5 },
+  },
+  oshepro: {
+    mobile: { x: 5, y: 21, w: 5, h: 7  },
+    tablet: { x: 6, y: 19, w: 10, h: 5.5 },
+    custom: { x: 5, y: 20, w: 2.5, h: 6.5 },
+    desktop: { x: 6, y: 20.5, w: 6, h: 5.5 },
+  },
+  resume: {
+    mobile: { x: 0, y: 40, w: 10, h: 5 },
+    tablet: { x: 0, y: 40, w: 0, h: 0 },
+    custom: { x: 0, y: 40, w: 0, h: 0 },
+    desktop: { x: 0, y: 40, w: 0, h: 0 },
+  },
+};
+
+function cloneDefaultLayout() {
+  return JSON.parse(JSON.stringify(DEFAULT_GRID_LAYOUT));
+}
+
 export default function Grid() {
   const [mounted, setMounted] = useState(false);
   const [compactType] = useState('vertical');
+  const [layoutVersion, setLayoutVersion] = useState(0);
 
   const screenSize = {
     isMobile: useMediaQuery({ maxWidth: 767 }),
@@ -29,75 +119,7 @@ export default function Grid() {
     isDesktop: useMediaQuery({ minWidth: 1025 }),
   };
 
-  const [gridLayout, setGridLayout] = useState({
-    about: {
-      mobile: { x: 0, y: 0, w: 10, h: 6 },
-      tablet: { x: 0, y: 0, w: 10, h: 6 },
-      custom: { x: 0, y: 0, w: 5, h: 7 },
-      desktop: { x: 0, y: 0, w: 6, h: 6 },
-    },
-    map: {
-      mobile: { x: 0, y: 6, w: 10, h: 3 },
-      tablet: { x: 0, y: 7, w: 10, h: 4 },
-      custom: { x: 5, y: 0, w: 5, h: 5 },
-      desktop: { x: 6, y: 0, w: 3, h: 6 },
-    },
-    vvdn: {
-      mobile: { x: 5, y: 9, w: 5, h: 7 },
-      tablet: { x: 6, y: 7, w: 4, h: 10 },
-      custom: { x: 7.5, y: 0, w: 1.5, h: 13.5 },
-      desktop: { x: 9, y: 0, w: 3, h: 11.5 },
-    },
-    linkedin: {
-      mobile: { x: 0, y: 9, w: 5, h: 3.5 },
-      tablet: { x: 0, y: 7, w: 6, h: 5 },
-      custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
-      desktop: { x: 0, y: 7, w: 3, h: 6 },
-    },
-    github: {
-      mobile: { x: 0, y: 12.5, w: 5, h: 3.5 },
-      tablet: { x: 6, y: 19, w: 4, h: 7 },
-      custom: { x: 2.5, y: 7, w: 1.5, h: 6.5 },
-      desktop: { x: 3, y: 7, w: 3, h: 6 },
-    },
-    thesis: {
-      mobile: { x: 0, y: 28, w: 10, h: 6 },
-      tablet: { x: 0, y: 31, w: 10, h: 5 },
-      custom: { x: 0, y: 20, w: 5, h: 7 },
-      desktop: { x: 6, y: 7, w: 3, h: 11.5 },
-    },
-    devsoc: {
-      mobile: { x: 0, y: 21, w: 5, h: 7 },
-      tablet: { x: 0, y: 13, w: 6, h: 5 },
-      custom: { x: 0, y: 7, w: 2.5, h: 6.5 },
-      desktop: { x: 0, y: 13.5, w: 6, h: 5.5 },
-    },
-    contact: {
-      mobile: { x: 6, y: 34, w: 10, h: 5 },
-      tablet: { x: 6, y: 25, w: 4, h: 5 },
-      custom: { x: 5, y: 7, w: 1.5, h: 7 },
-      desktop: { x: 9, y: 11.5, w: 3, h: 6 },
-    },
-    aiindex: {
-      mobile: { x: 0, y: 16, w: 10, h: 5 },
-      tablet: { x: 0, y: 19, w: 6, h: 7 },
-      custom: { x: 0, y: 7, w: 2.5, h: 7 },
-      desktop: { x: 0, y: 20.5, w: 6, h: 5.5 },
-    },
-    oshepro: {
-      mobile: { x: 5, y: 21, w: 5, h: 7 },
-      tablet: { x: 0, y: 25, w: 6, h: 5 },
-      custom: { x: 0, y: 7, w: 2.5, h: 7 },
-      desktop: { x: 6, y: 20.5, w: 6, h: 5.5 },
-    },
-    resume: {
-      // mobile only
-      mobile: { x: 0, y: 40, w: 10, h: 5 },
-      tablet: { x: 0, y: 40, w: 0, h: 0 },
-      custom: { x: 0, y: 40, w: 0, h: 0 },
-      desktop: { x: 0, y: 40, w: 0, h: 0 },
-    },
-  });
+  const [gridLayout, setGridLayout] = useState(cloneDefaultLayout);
 
   // helper to get current breakpoint name
   const getCurrentScreenSize = () => {
@@ -113,10 +135,11 @@ export default function Grid() {
   }, []);
 
   useEffect(() => {
+    const breakpoint = getCurrentScreenSize();
     const currentLayouts = {};
-    Object.keys(gridLayout).forEach((div) => {
-      const currentDivLayout = gridLayout[div][getCurrentScreenSize()];
-      currentLayouts[div] = currentDivLayout;
+    Object.keys(gridLayout).forEach((key) => {
+      if (key === 'current') return;
+      currentLayouts[key] = gridLayout[key][breakpoint];
     });
     if (JSON.stringify(gridLayout.current) !== JSON.stringify(currentLayouts)) {
       setGridLayout((prevLayout) => ({
@@ -126,7 +149,31 @@ export default function Grid() {
     }
   }, [screenSize.isMobile, screenSize.isTablet, screenSize.isCustom, screenSize.isDesktop]);
 
-  const SCALE = 2;
+  const handleLayoutChange = (layout) => {
+    const breakpoint = getCurrentScreenSize();
+    setGridLayout((prev) => {
+      const next = { ...prev, current: { ...prev.current } };
+      layout.forEach((item) => {
+        if (!next[item.i]) return;
+        const unscaled = {
+          x: item.x / SCALE,
+          y: item.y / SCALE,
+          w: item.w / SCALE,
+          h: item.h / SCALE,
+        };
+        next[item.i] = { ...next[item.i], [breakpoint]: unscaled };
+        next.current[item.i] = unscaled;
+      });
+      return next;
+    });
+  };
+
+  const resetGrid = () => {
+    setGridLayout(cloneDefaultLayout());
+    setLayoutVersion((v) => v + 1);
+  };
+
+  const isDraggable = !screenSize.isTablet && !screenSize.isMobile;
 
   const layouts = useMemo(() => {
     const breakpoints = ['mobile', 'tablet', 'custom', 'desktop'];
@@ -177,7 +224,20 @@ export default function Grid() {
 
   return (
     <div className='lg:w-[70rem] md:w-[40rem] w-[20rem] custom:w-[40rem]'>
+      {isDraggable && (
+        <div className='flex justify-end mb-2'>
+          <button
+            type='button'
+            onClick={resetGrid}
+            className='no-drag text-xs text-gray-400 hover:text-gray-700 transition-colors'
+          >
+            Reset layout
+          </button>
+        </div>
+      )}
+
       <ResponsiveReactGridLayout
+        key={layoutVersion}
         layouts={layouts}
         breakpoints={breakpoints}
         cols={cols}
@@ -188,9 +248,10 @@ export default function Grid() {
         preventCollision={!compactType}
         isDroppable={true}
         droppingItem={{ i: 'xx', h: Math.round(50 * SCALE), w: Math.round((250 / 10) * SCALE) }}
-        isDraggable={screenSize.isTablet || screenSize.isMobile ? false : true}
+        isDraggable={isDraggable}
         draggableCancel={'a, button, [role="button"], .no-drag'}
         isResizable={false}
+        onLayoutChange={handleLayoutChange}
         className='w-full space-y-1 md:space-y-0'
       >
         <div key='about' data-grid={scaledCurrent && scaledCurrent['about']} className='block bg-white rounded-3xl py-1 pl-6 shadow-none ring-1 ring-black/5'>
@@ -217,12 +278,20 @@ export default function Grid() {
           <Thesis />
         </div>
 
+        <div key='whereabouts' data-grid={scaledCurrent && scaledCurrent['whereabouts']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <Whereabouts />
+        </div>
+
         <div key='devsoc' data-grid={scaledCurrent && scaledCurrent['devsoc']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <Devsoc />
         </div>
 
         <div key='contact' data-grid={scaledCurrent && scaledCurrent['contact']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
           <Contact />
+        </div>
+
+        <div key='seeds' data-grid={scaledCurrent && scaledCurrent['seeds']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>
+          <Seeds />
         </div>
 
         <div key='aiindex' data-grid={scaledCurrent && scaledCurrent['aiindex']} className='block bg-white rounded-3xl shadow-none ring-1 ring-black/5'>

@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Grid from '../components/Grid';
-import NavBar from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';
 import { useMediaQuery } from 'react-responsive';
 
@@ -21,8 +20,7 @@ export default function Home() {
   if (!mounted) return null; // Wait for client to mount before rendering anything
 
   return (
-    <div className="pt-10 mb-10">
-      <NavBar />
+    <>
       <div className="lg:mx-32 mt-5 flex justify-center items-center">
         <Grid />
       </div>
@@ -45,6 +43,6 @@ export default function Home() {
       <div className="flex justify-center items-center">
         <p className="text-sm text-gray-300 font-extralight">designed by nev</p>
       </div>
-    </div>
+    </>
   );
 }

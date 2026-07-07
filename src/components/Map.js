@@ -9,8 +9,10 @@ function Map() {
   return (
     <div className='h-full'>
       <button
-        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125'
+        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125 no-drag'
         onClick={toggleMap}
+        type='button'
+        aria-label='Toggle map location'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'

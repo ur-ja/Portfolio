@@ -10,8 +10,10 @@ export default function About() {
   return (
     <div className=''>
       <button
-        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125 border'
+        className='absolute z-10 right-4 top-5 bg-white rounded-full p-2 transform transition duration-500 hover:scale-125 border no-drag'
         onClick={handleImageClick}
+        type='button'
+        aria-label='Toggle memoji'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
