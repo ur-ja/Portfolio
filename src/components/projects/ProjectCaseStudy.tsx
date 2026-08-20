@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 import BackToHome from '../BackToHome';
 import type { Project, SectionBlock } from '../../data/projects';
 
@@ -63,6 +64,39 @@ function CaseStudyImage({
   );
 }
 
+// Text blocks accept markdown-style [label](https://url) links.
+const inlineLinkPattern = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g;
+
+function renderInlineLinks(content: string) {
+  const nodes: ReactNode[] = [];
+  let cursor = 0;
+  let match: RegExpExecArray | null;
+
+  inlineLinkPattern.lastIndex = 0;
+  while ((match = inlineLinkPattern.exec(content)) !== null) {
+    if (match.index > cursor) {
+      nodes.push(content.slice(cursor, match.index));
+    }
+    nodes.push(
+      <a
+        key={match.index}
+        href={match[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-gray-900 underline underline-offset-2 decoration-gray-400 hover:decoration-gray-900 transition-colors"
+      >
+        {match[1]}
+      </a>,
+    );
+    cursor = match.index + match[0].length;
+  }
+
+  if (nodes.length === 0) return content;
+  if (cursor < content.length) nodes.push(content.slice(cursor));
+
+  return nodes;
+}
+
 function renderBlock(block: SectionBlock, index: number, defaultImageSize: ImageSize) {
   switch (block.type) {
     case 'text':
@@ -71,7 +105,7 @@ function renderBlock(block: SectionBlock, index: number, defaultImageSize: Image
           key={index}
           className="text-base leading-relaxed text-gray-700 mb-3 last:mb-0"
         >
-          {block.content}
+          {renderInlineLinks(block.content)}
         </p>
       );
     case 'bullets':

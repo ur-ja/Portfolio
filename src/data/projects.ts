@@ -47,6 +47,7 @@ const OSHEPRO_IMG = '/projects/oshepro';
 const WHEREABOUTS_IMG = '/projects/whereabouts';
 const TDS_URL =
   'https://www.unsw.edu.au/engineering/research-technology/research-centres-institutes/trustworthy-digital-society';
+const TDS_AI_INDEX_URL = `${TDS_URL}/projects/ai-index-demonstration`;
 
 export const projects: Project[] = [
   {
@@ -78,6 +79,10 @@ export const projects: Project[] = [
             type: 'text',
             content:
               "AI Index Australia addresses this gap. Developed through Trustworthy Digital Society, a joint research initiative between UNSW and UTS, the project provides an interactive, Australia-specific view of AI activity. Work to date has focused on the research and development domain, covering publications, grants, patents, and talent mobility. The team is in early discussions with Stanford HAI regarding longer-term collaboration.",
+          },
+          {
+            type: 'text',
+            content: `See the [official UNSW project page](${TDS_AI_INDEX_URL}) for the AI Index, where my colleague and I walk through the dashboard on video.`,
           },
         ],
       },
@@ -169,6 +174,10 @@ export const projects: Project[] = [
       {
         label: 'Live dashboard',
         href: 'https://dashboard.australia-ai-index.cloud.edu.au/about',
+      },
+      {
+        label: 'UNSW project page',
+        href: TDS_AI_INDEX_URL,
       },
       {
         label: 'Trustworthy Digital Society',
