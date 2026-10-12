@@ -159,29 +159,36 @@ export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
           ))}
         </div>
 
-        {project.dashboardUrl && (
-          <a
-            href={project.dashboardUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-700 transition-colors"
-          >
-            View live dashboard
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4"
+        {(project.primaryLink || project.dashboardUrl) && (
+          <div className="mb-2">
+            <a
+              href={project.primaryLink?.href ?? project.dashboardUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-700 transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-              />
-            </svg>
-          </a>
+              {project.primaryLink?.label ?? 'View live dashboard'}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                />
+              </svg>
+            </a>
+            {project.primaryLink?.caption && (
+              <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                {project.primaryLink.caption}
+              </p>
+            )}
+          </div>
         )}
       </header>
 
@@ -205,22 +212,29 @@ export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
         ))}
       </div>
 
-      {project.links.length > 0 && (
+      {(project.links.length > 0 || project.linksNote) && (
         <footer className="mt-12 pt-8 border-t border-black/5">
           <h2 className="text-sm font-medium text-gray-400 mb-4">Links</h2>
-          <div className="flex flex-wrap gap-4">
-            {project.links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-gray-700 underline underline-offset-4 hover:text-gray-900 transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+          {project.links.length > 0 && (
+            <div className="flex flex-wrap gap-4">
+              {project.links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-700 underline underline-offset-4 hover:text-gray-900 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+          {project.linksNote && (
+            <p className="mt-3 text-sm text-gray-500 leading-relaxed">
+              {project.linksNote}
+            </p>
+          )}
         </footer>
       )}
     </article>

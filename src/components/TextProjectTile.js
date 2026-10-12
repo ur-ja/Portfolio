@@ -14,6 +14,12 @@ const variants = {
     body: 'text-white/90',
     footer: 'text-white/50',
   },
+  purple: {
+    tile: 'bg-[#44009B] text-white',
+    date: 'text-white/60',
+    body: 'text-white/90',
+    footer: 'text-white/50',
+  },
 };
 
 export default function TextProjectTile({
@@ -26,7 +32,7 @@ export default function TextProjectTile({
   description,
   footer,
 }) {
-  const v = variants[variant];
+  const v = variants[variant] ?? variants.light;
   const titleClass =
     size === 'wide'
       ? 'text-lg sm:text-2xl lg:text-3xl'

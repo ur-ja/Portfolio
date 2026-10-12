@@ -1,15 +1,18 @@
 import React from 'react';
-import TileArrowLink from './TileArrowLink';
+import TextProjectTile from './TextProjectTile';
+import { SEGMENT_TILE_VARIANT } from '../data/segments';
 
 export default function VVDN() {
   return (
-    <div className='block bg-[#44009B] rounded-3xl h-full relative'>
-      <img
-        src='/vvdn.svg'
-        alt='VVDN Technologies'
-        className='h-full w-full pointer-events-none'
-      />
-      <TileArrowLink href='/projects/vvdn-hr-survey' ariaLabel='Open VVDN HR Survey case study' />
-    </div>
+    <TextProjectTile
+      href='/projects/vvdn-hr-survey'
+      ariaLabel='Open VVDN HR Survey case study'
+      variant={SEGMENT_TILE_VARIANT.experience}
+      size='tall'
+      dates='March to May 2024'
+      title='HR Survey at VVDN'
+      description='Full-stack HR survey app built during my internship. Flutter and Django, now in active use by the HR department.'
+      footer='Software Engineering Intern · Flutter · Django'
+    />
   );
 }

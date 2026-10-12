@@ -1,16 +1,18 @@
 import React from 'react';
-import TileArrowLink from './TileArrowLink';
+import TextProjectTile from './TextProjectTile';
+import { SEGMENT_TILE_VARIANT } from '../data/segments';
 
 export default function Devsoc() {
   return (
-    <div className='block bg-[#44009B] rounded-3xl h-full relative'>
-      <img src='/devsoc.svg' className='hidden md:block w-full h-full pointer-events-none' alt='' />
-      <img
-        src='/devsoc-mobile.svg'
-        className='block md:hidden w-full h-full pointer-events-none'
-        alt='DevSoc'
-      />
-      <TileArrowLink href='/projects/devsoc' ariaLabel='Open DevSoc case study' />
-    </div>
+    <TextProjectTile
+      href='/projects/devsoc'
+      ariaLabel='Open DevSoc case study'
+      variant={SEGMENT_TILE_VARIANT.experience}
+      size='wide'
+      dates='March 2023 to November 2025'
+      title='DevSoc'
+      description='Freerooms, Unilectives, and Director on Bridges. Three years shipping student-facing apps at UNSW.'
+      footer='Frontend Engineer to Director · React · Next.js'
+    />
   );
 }

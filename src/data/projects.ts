@@ -1,3 +1,5 @@
+import type { SegmentId } from './segments';
+
 export interface ProjectLink {
   label: string;
   href: string;
@@ -26,6 +28,8 @@ export interface Project {
   organisation: string;
   dates: string;
   summary: string;
+  /** Portfolio nav segments this case study belongs to. */
+  segments: SegmentId[];
   tags: string[];
   tileDescription: string;
   imageSize?: 'full' | 'medium' | 'phone';
@@ -38,6 +42,12 @@ export interface Project {
   sections: ProjectSection[];
   links: ProjectLink[];
   dashboardUrl?: string;
+  primaryLink?: {
+    href: string;
+    label: string;
+    caption?: string;
+  };
+  linksNote?: string;
 }
 
 const IMG = '/projects/ai-index';
@@ -45,6 +55,7 @@ const VVDN_IMG = '/projects/vvdn';
 const DEVSOC_IMG = '/projects/devsoc';
 const OSHEPRO_IMG = '/projects/oshepro';
 const WHEREABOUTS_IMG = '/projects/whereabouts';
+const GEARS_IMG = '/projects/global-gears';
 const TDS_URL =
   'https://www.unsw.edu.au/engineering/research-technology/research-centres-institutes/trustworthy-digital-society';
 const TDS_AI_INDEX_URL = `${TDS_URL}/projects/ai-index-demonstration`;
@@ -56,6 +67,7 @@ export const projects: Project[] = [
     role: 'Research Assistant',
     organisation: 'Trustworthy Digital Society (UNSW × UTS)',
     dates: 'August 2025 to present',
+    segments: ['experience'],
     summary:
       "One of two engineers at Trustworthy Digital Society building Australia's first AI Index. The project brings together research, grants, patents, and talent data through a pipeline and interactive dashboard focused on the Australian AI landscape.",
     tags: ['Data Pipelines', 'Full-Stack', 'Python', 'React', 'Postgres'],
@@ -97,7 +109,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              "Key contributions include linking grant data from the ARC and Research Link Australia to publications in OpenAlex, with quality indicators applied through Scimago journal rankings and CORE conference rankings. Matching conferences to publications required building a DBLP full-text search index, as conference naming conventions lack the standardisation found in journal publishing. I also developed patent ingestion pipelines from IP RAPID and PATSTAT, implemented AI classification across all data sources, and built talent mobility tracking from ORCID to analyse researcher movement in and out of Australia.",
+              "Key contributions include linking OpenAlex publications to quality indicators, using Scimago for journal rankings and CORE for conference rankings. Matching conferences to publications required building a DBLP full-text search index, because conference naming has none of the standardisation that journal publishing does: the same venue appears as an abbreviation, a full name, with and without the year, in variants that never match on string comparison. I also developed patent ingestion pipelines from IP RAPID and PATSTAT, implemented AI classification across all data sources, and built talent mobility tracking from ORCID to analyse researcher movement in and out of Australia.",
           },
           {
             type: 'text',
@@ -191,11 +203,268 @@ export const projects: Project[] = [
     dashboardUrl: 'https://dashboard.australia-ai-index.cloud.edu.au/about',
   },
   {
+    slug: 'global-gears',
+    title: 'Global Gears work order system',
+    role: 'Software Engineer (Contract)',
+    organisation: 'Global Gears India Pvt. Ltd.',
+    dates: '2026 to present',
+    segments: ['experience'],
+    summary:
+      'A work order and document system for a gear manufacturer in Ghaziabad. Everyone in the company needs the drawings and specifications for a job, but the purchase orders attached to that same job carry the rates, and those are commercially sensitive. The system had to serve both needs out of one set of documents, which meant building proper access levels rather than a shared folder. I was the only engineer on the project, from the first conversation through to deployment.',
+    tags: ['Full-Stack', 'Security', 'Postgres', 'Next.js', 'TypeScript'],
+    tileDescription:
+      'Work order and document system for a gear manufacturer: access rules in the database, not the UI.',
+    primaryLink: {
+      href: 'https://global-gears-register.vercel.app/',
+      label: 'Open live system',
+      caption: 'Sign-in is restricted to staff.',
+    },
+    heroImage: {
+      src: `${GEARS_IMG}/work-orders-list.png`,
+      alt: 'Global Gears work orders list with search, status filters, and summary cards',
+      caption: 'The work orders list. Sensitive fields are redacted in these screenshots.',
+    },
+    sections: [
+      {
+        title: 'The problem',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Global Gears is a gear manufacturer with about fourteen staff. Purchase orders and engineering drawings arrived by email into a single inbox, were printed, and were carried down to the manufacturing floor. The printing was never the problem and still happens.',
+          },
+          {
+            type: 'text',
+            content:
+              'The first problem was that once documents existed, nobody could find them again. Everything lived in one inbox and on paper, so answering a question about an order meant asking the person who had opened the email.',
+          },
+          {
+            type: 'text',
+            content:
+              'The second problem was pricing. A client\'s purchase order shows what the customer is paying. The purchase orders the company sends its own suppliers show what it pays for forging, heat treatment and so on. Put the two together and you have the margin on the job, which is close to the most sensitive number the business has. In an industry this size, rates that start circulating affect what the company can quote later, so the number of people who can open a priced document needs to stay as small as the work allows. Everything else, the drawings, the inspection reports, the quality plans, has to be open to the whole floor, because that is what the job runs on.',
+          },
+        ],
+      },
+      {
+        title: 'Why I didn\'t use an off-the-shelf tool',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'I spent a while looking at Google Drive before writing any code, and two shared drives would have worked technically. The problem was that it depends on people filing things correctly. Every new order would require someone to name a folder exactly right and put the purchase order in the restricted drive, and if either went wrong there would be no indication of it. A priced document sitting in the open drive looks exactly like one that belongs there.',
+          },
+          {
+            type: 'text',
+            content:
+              'Building something custom moves that work from every order at runtime to one time during the build. This mattered because the client had told me plainly that they couldn\'t enforce filing discipline, and the people who would have been responsible for getting it right every time were the two the project was meant to help.',
+          },
+        ],
+      },
+      {
+        title: 'Access levels',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Access is organised as three levels rather than per-document permissions, which keeps it explainable to the people using it.',
+          },
+          {
+            type: 'text',
+            content:
+              'Full access covers the director and the person who runs procurement. They can create work orders, change status, open priced documents and manage everyone else\'s access. Pricing access covers accounts, who can open priced documents but cannot create orders or change anyone\'s access. Standard access covers production and quality control, which is most of the company, and allows finding orders, downloading drawings and uploading documents, but never opens a priced document.',
+          },
+          {
+            type: 'text',
+            content:
+              'The levels are named for privilege rather than department, so someone moving between teams doesn\'t require anybody to reinterpret what their role means. In practice this means three people can open a priced document and eleven cannot, and the People screen shows that count at the top, because it is the question the director keeps asking.',
+          },
+          {
+            type: 'image',
+            src: `${GEARS_IMG}/create-work-order.png`,
+            alt: 'Create new work order panel with client, project, PO fields and optional purchase order upload',
+            caption:
+              'Creating a work order. The number is assigned on save, and documents selected here upload with the order.',
+          },
+        ],
+      },
+      {
+        title: 'The security model',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'The access rules are in the database rather than the interface, so the system behaves correctly even if the application code has a bug in it.',
+          },
+          {
+            type: 'text',
+            content:
+              'Purchase orders have their own table and their own storage bucket instead of sitting in the general document table behind a flag. If they shared a table, every query written from then on would have to remember to exclude them, and a single forgotten filter would leak one.',
+          },
+          {
+            type: 'text',
+            content:
+              'The purchase order bucket has no storage policy at all, which is intentional. Postgres row level security denies anything that no policy allows, so every request from a browser is refused, including requests from administrators. The only credential that opens the bucket is the service key, which lives in server environment variables and never reaches the browser.',
+          },
+          {
+            type: 'text',
+            content:
+              'This means a purchase order can only be served by a server route. The route looks the record up by its id, derives the storage path from that record rather than taking it from the request, checks the caller\'s level through their own session, writes an audit entry, and then streams the file. The audit entry is written before any of the file is sent, and if that write fails the whole request fails.',
+          },
+          {
+            type: 'text',
+            content:
+              'Access comes from holding an active row in the application\'s user table, not from having a valid session. The distinction matters because Supabase issues a session as soon as Google sign-in succeeds, which happens before any of my code runs. Checking whether someone is signed in therefore only tells you that they have a Google account.',
+          },
+          {
+            type: 'text',
+            content:
+              'The audit log cannot be written from the browser at all, and the server\'s own key has insert and select permissions but nothing else. The log is append-only even to the most privileged credential in the system, so a compromised or buggy server route could add entries to it but could not alter the ones already there. This matters because the honest control over a priced document is traceability rather than prevention. Anyone who can legitimately open a purchase order can photograph the screen, and the system doesn\'t pretend otherwise, but a leak points at one of three named people rather than being anonymous.',
+          },
+        ],
+      },
+      {
+        title: 'Testing the model rather than trusting it',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Since the schema is doing the security work, reading through it carefully isn\'t sufficient. I wrote an adversarial test suite that runs against a local Postgres instance and currently holds 100 assertions.',
+          },
+          {
+            type: 'text',
+            content:
+              'It covers five identities: an administrator, a user with pricing access, an ordinary floor user, an employee whose access has been removed, and a stranger who has completed Google sign-in but was never added to the system. It also tests the public anonymous key and the server\'s own key. Each assertion is a property of the database itself, so it holds regardless of what the application code does.',
+          },
+          {
+            type: 'text',
+            content:
+              'The suite found the most serious problem in the project, which I had introduced myself. The original policies checked whether the caller was signed in, which would have made every work order, document and drawing readable by anyone with a Gmail address and the public key that ships in the browser bundle by design. Access now derives from membership instead, and the suite demonstrates the difference in both directions: run it against the original schema and the stranger can read work orders, documents and notes, and run it against the current one and they get nothing back.',
+          },
+          {
+            type: 'text',
+            content:
+              'A second issue came from a change in the platform. Supabase stopped automatically granting table privileges on newly created projects, while the local development stack kept the previous behaviour. The result would have been a system where every test passed locally and every request failed in production. Privileges are now granted explicitly, the anonymous role has none at all, and the relevant test iterates over every table in the schema instead of a list I maintain by hand, so any table added later is covered automatically.',
+          },
+        ],
+      },
+      {
+        title: 'Designing for people who won\'t be trained',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Most of the staff are in their fifties and sixties and aren\'t confident with software. The director had previously needed help uploading photographs to Google Drive. One of the client\'s constraints was that the system couldn\'t require people to learn new habits, so it had to be usable without a training session.',
+          },
+          {
+            type: 'text',
+            content:
+              'The five document categories are always visible, with "None yet" shown under the empty ones, which gives every type of document a fixed home. Uploads sit inside each category section instead of behind a dropdown, so the category is determined by which button was pressed and nobody has to make a filing decision.',
+          },
+          {
+            type: 'text',
+            content:
+              'Priced documents are shown in a visually distinct block instead of behind a confirmation dialog. The person in accounts opens purchase orders often enough that a dialog would become muscle memory within a couple of weeks, whereas a visual difference doesn\'t wear off. For everyone on standard access that block isn\'t greyed out, it simply isn\'t rendered, so they never discover there is something they cannot see.',
+          },
+          {
+            type: 'text',
+            content:
+              'Legibility was treated as a requirement rather than a finishing touch, with a minimum type size, a contrast floor and a minimum touch target size, all measured rather than judged by eye. The system also generates the cover sheet that was previously typed by hand for every order, and assigns work order numbers itself.',
+          },
+          {
+            type: 'image',
+            src: `${GEARS_IMG}/cover-sheet-panel.png`,
+            alt: 'Cover sheet side panel with work order fields and Open PDF button',
+            caption:
+              'The cover sheet panel. Fields that used to be typed by hand are filled from the work order.',
+          },
+          {
+            type: 'image',
+            src: `${GEARS_IMG}/cover-sheet-pdf.png`,
+            alt: 'Generated Global Gears India cover sheet PDF',
+            caption: 'The printed cover sheet PDF the system generates for each order.',
+            size: 'medium',
+          },
+        ],
+      },
+      {
+        title: 'Stack and infrastructure',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Next.js (App Router), TypeScript, Tailwind, Supabase for Postgres, Auth and Storage, Postgres row level security, SQL migrations, Vercel and Google OAuth.',
+          },
+          {
+            type: 'text',
+            content:
+              'Both the database and the serverless functions are pinned to the Mumbai region, so files showing the company\'s rates don\'t leave India in transit. The purchase order route runs on the Node runtime rather than Edge because edge functions can\'t be pinned to a specific region.',
+          },
+          {
+            type: 'text',
+            content:
+              'The project keeps a written decision record alongside the code, which captures the reasoning behind each choice and not only the conclusion, and gets updated whenever something changes. A number of decisions were overturned during the build, including how purchase orders are delivered, the numbering scheme and the entire sign-in model, and those reversals are recorded with their reasons as well.',
+          },
+        ],
+      },
+    ],
+    links: [
+      {
+        label: 'Live system',
+        href: 'https://global-gears-register.vercel.app/',
+      },
+    ],
+    linksNote: 'The code is private, since it belongs to a real company.',
+  },
+  {
+    slug: 'patent-classification',
+    title: 'Teaching a small model to classify patents',
+    role: 'Research Assistant',
+    organisation: 'Trustworthy Digital Society (UNSW × UTS)',
+    dates: '2026 to present',
+    segments: ['experience'],
+    summary:
+      'Early-stage research on teaching a small, local model to classify patents and explain its choice, using reasoning from a larger model as the teaching signal. Work with a colleague at Trustworthy Digital Society. Paper in progress.',
+    tags: ['Research', 'Machine Learning', 'LLMs', 'Python'],
+    tileDescription:
+      'Early-stage research on local patent classification with explanations. Paper in progress.',
+    sections: [
+      {
+        title: 'The idea',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Patent classification is slow expert work against a large hierarchy of codes. Large models can help, but they are expensive to run at scale, and patent applications cannot be sent to external APIs. The goal is a small model that can run locally, assign a code, and give a reason for it.',
+          },
+        ],
+      },
+      {
+        title: 'Status',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'This work is still in development. More detail will go up when the paper is further along.',
+          },
+        ],
+      },
+    ],
+    links: [
+      {
+        label: 'Trustworthy Digital Society',
+        href: TDS_URL,
+      },
+    ],
+    // TODO: add paper link when published
+    linksNote: 'Nothing else yet. Paper in progress.',
+  },
+  {
     slug: 'sdlt-deepfake-framework',
     title: 'Scalable and Privacy-Preserving Deepfake Detection Framework',
     role: 'Honours Thesis Author',
     organisation: 'UNSW Sydney',
     dates: '2024 to 2025',
+    segments: ['experience'],
     summary:
       'Honours thesis on making deepfake detection scalable and privacy-preserving on the blockchain. Published at SDLT 2025 and awarded Best Paper at the symposium.',
     tags: ['Research', 'Blockchain', 'Privacy', 'Python', 'Hyperledger'],
@@ -289,6 +558,7 @@ export const projects: Project[] = [
     role: 'Software Engineering Intern',
     organisation: 'VVDN Technologies',
     dates: 'March to May 2024',
+    segments: ['experience'],
     summary:
       'Built a full-stack HR survey app during my internship on the Cloud & Apps Engineering team. Flutter frontend, Django REST backend, shipped a prototype that HR now uses internally.',
     tags: ['Flutter', 'Django', 'Full-Stack', 'Mobile', 'PostgreSQL'],
@@ -392,6 +662,7 @@ export const projects: Project[] = [
     role: 'Frontend Engineer → Director (Bridges)',
     organisation: 'UNSW Sydney',
     dates: 'March 2023 to November 2025',
+    segments: ['experience'],
     summary:
       'Three years across DevSoc project teams, shipping student-facing apps used on campus. Freerooms and Unilectives as a frontend engineer, then Director on Bridges.',
     tags: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Leadership'],
@@ -548,6 +819,7 @@ export const projects: Project[] = [
     role: 'UX Designer',
     organisation: 'Oshepro',
     dates: 'July to December 2023',
+    segments: ['experience'],
     summary:
       'I worked on Oshepro\'s core workflows so safety teams could complete forms properly without getting stuck in confusing UI.',
     tileDescription:
@@ -746,6 +1018,7 @@ export const projects: Project[] = [
     role: 'Product Engineer',
     organisation: 'Personal Project',
     dates: '2026',
+    segments: ['projects'],
     summary:
       'I built this for myself while deciding between India and Australia. I was in India for a few months working remotely, and I did not want to waste that window of experimentation.',
     tags: ['Expo', 'React Native', 'TypeScript', 'Supabase', 'PWA'],

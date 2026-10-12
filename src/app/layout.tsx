@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import NavBar from '../components/NavBar';
+import { SegmentProvider } from '../components/SegmentContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,10 +29,15 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='pt-10 mb-10'>
-          <NavBar />
-          {children}
-        </div>
+        <SegmentProvider>
+          <div className='min-h-screen pt-10 flex flex-col'>
+            <NavBar />
+            <div className='flex-1 mb-10'>{children}</div>
+            <footer className='flex justify-center items-center pb-6'>
+              <p className='text-sm text-gray-300 font-extralight'>design by nev</p>
+            </footer>
+          </div>
+        </SegmentProvider>
       </body>
     </html>
   );

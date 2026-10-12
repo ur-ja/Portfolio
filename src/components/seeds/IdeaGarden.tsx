@@ -398,15 +398,15 @@ export default function IdeaGarden() {
       <div className='flex flex-wrap gap-4 text-xs text-gray-500 mb-10'>
         <span className='flex items-center gap-1.5'>
           <span className='w-2 h-2 rounded-full bg-gray-400' />
-          Seed — raw idea
+          Seed: raw idea
         </span>
         <span className='flex items-center gap-1.5'>
           <span className='w-2 h-2 rounded-full bg-green-500' />
-          Sprout — gaining traction ({SPROUT_THRESHOLD}+ drops)
+          Sprout: gaining traction ({SPROUT_THRESHOLD}+ drops)
         </span>
         <span className='flex items-center gap-1.5'>
           <span className='w-2 h-2 rounded-full bg-blue-500' />
-          Flower — I shipped it (manual)
+          Flower: I shipped it (manual)
         </span>
       </div>
 

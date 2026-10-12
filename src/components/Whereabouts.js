@@ -1,12 +1,13 @@
 import React from 'react';
 import ProjectTile from './ProjectTile';
+import { SEGMENT_TILE_VARIANT } from '../data/segments';
 
 export default function Whereabouts() {
   return (
     <ProjectTile
       href='/projects/whereabouts'
       ariaLabel='Open Whereabouts case study'
-      variant='blue'
+      variant={SEGMENT_TILE_VARIANT.projects}
       layout='tall'
       compact
       dates='2026'

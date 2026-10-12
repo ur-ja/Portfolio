@@ -35,10 +35,12 @@ export default function About() {
       />
       <p className='p-4 font-poppins font-light md:text-md text-sm'>
         Hi! I'm{' '}
-        <span className='mx-1 text-lg md:text-2xl font-extrabold'>urja</span>, 
-        a Research Assistant at UNSW exploring how data, technology, and design can 
-        drive meaningful change. I love turning complex problems into simple, elegant 
-        products that make a difference in people’s lives.
+        <span className='mx-1 text-lg md:text-2xl font-extrabold'>urja</span>.
+        I'm one of two engineers building Australia's first national AI Index at
+        UNSW, where I also work on research teaching small models to classify patents.
+        On the side I build things for people who need them, most recently a document
+        system for a manufacturer in India whose drawings all lived in paper files.
+        I like problems where the hard part is in the data rather than the interface.
       </p>
 
     </div>

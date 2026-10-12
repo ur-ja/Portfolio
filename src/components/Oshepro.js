@@ -1,16 +1,18 @@
 import React from 'react';
-import TileArrowLink from './TileArrowLink';
+import TextProjectTile from './TextProjectTile';
+import { SEGMENT_TILE_VARIANT } from '../data/segments';
 
 export default function Oshepro() {
   return (
-    <div className='block bg-[#44009B] rounded-3xl h-full relative'>
-      <img src='/oshepro.svg' className='hidden md:block w-full h-full pointer-events-none' alt='' />
-      <img
-        src='/oshepro-mobile.svg'
-        className='block md:hidden w-full h-full pointer-events-none'
-        alt='Oshepro'
-      />
-      <TileArrowLink href='/projects/oshepro' ariaLabel='Open Oshepro UX design case study' />
-    </div>
+    <TextProjectTile
+      href='/projects/oshepro'
+      ariaLabel='Open Oshepro UX design case study'
+      variant={SEGMENT_TILE_VARIANT.experience}
+      size='tall'
+      dates='July to December 2023'
+      title='Oshepro EHS Platform'
+      description='UX redesign across SHEMa, AMLA, and TRACI so safety teams could complete forms without getting stuck.'
+      footer='UX Designer · Figma · Enterprise'
+    />
   );
 }
