@@ -40,7 +40,6 @@ export default function About() {
         UNSW, where I also work on research teaching small models to classify patents.
         On the side I build things for people who need them, most recently a document
         system for a manufacturer in India whose drawings all lived in paper files.
-        I like problems where the hard part is in the data rather than the interface.
       </p>
 
     </div>
