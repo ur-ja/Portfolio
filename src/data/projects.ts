@@ -28,6 +28,8 @@ export interface Project {
   organisation: string;
   dates: string;
   summary: string;
+  /** Compact contribution bullets shown near the top of the case study. */
+  highlights?: string[];
   /** Portfolio nav segments this case study belongs to. */
   segments: SegmentId[];
   tags: string[];
@@ -69,10 +71,17 @@ export const projects: Project[] = [
     dates: 'August 2025 to present',
     segments: ['experience'],
     summary:
-      "One of two engineers on AI Index Australia, a public dashboard and data platform for AI-related research activity in Australia. I own specific ingestion pipelines, quality linkages, and parts of the config-driven frontend on a shared React, FastAPI, and PostgreSQL stack hosted on ARDC Nectar.",
+      "One of two engineers building AI Index Australia, a public dashboard and data platform for AI-related research activity in Australia. I contribute research data pipelines, cross-source linkages, and a config-driven frontend on a shared React, FastAPI, and PostgreSQL stack hosted on ARDC Nectar.",
+    highlights: [
+      'ORCID ingestion for talent mobility.',
+      'PATSTAT ingestion and DOCDB patent-family methodology.',
+      'OpenAlex linked to Scimago and CORE rankings, with a DBLP FTS5 index for messy conference names.',
+      'Config-driven frontend architecture across 37 charts.',
+      'Auth0 SSO, email verification, and a PostgreSQL user allowlist.',
+    ],
     tags: ['Data Pipelines', 'Full-Stack', 'Python', 'React', 'Postgres'],
     tileDescription:
-      'Data pipelines and interactive dashboard for AI Index Australia at Trustworthy Digital Society.',
+      'One of two engineers building AI Index Australia, contributing research data pipelines, cross-source linkages and a config-driven dashboard.',
     heroImage: {
       src: `${IMG}/hero-landing.png`,
       alt: 'AI Index Australia landing page',
@@ -411,7 +420,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'sdlt-deepfake-framework',
-    title: 'Scalable and Privacy-Preserving Deepfake Detection Framework',
+    title: 'Privacy-Preserving Deepfake Detection',
     role: 'Honours Thesis Author',
     organisation: 'UNSW Sydney',
     dates: '2024 to 2025',
@@ -420,7 +429,7 @@ export const projects: Project[] = [
       'Honours thesis on privacy-preserving deepfake-related verification using Hyperledger Fabric. In evaluation, the framework reduced blockchain load by 91% and completed 90% of verification operations in under 100 ms. Published by Springer and awarded Best Paper at SDLT 2025.',
     tags: ['Research', 'Blockchain', 'Privacy', 'Python', 'Hyperledger'],
     tileDescription:
-      'Honours thesis on scalable, privacy-preserving deepfake detection. Published and awarded Best Paper at SDLT 2025.',
+      'Honours thesis on scalable deepfake verification with Hyperledger Fabric. Best Paper at SDLT 2025; published by Springer.',
     sections: [
       {
         title: 'Overview',
@@ -428,7 +437,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'This was my Software Engineering Honours thesis at UNSW Sydney, supervised by Dr Hye-Young Paik. The work investigated privacy-preserving verification of deepfake-related content on Hyperledger Fabric, using Redis, xxHash, perceptual hashing, and Idemix zero-knowledge proofs.',
+              'This was my Software Engineering Honours thesis at UNSW Sydney, supervised by Dr Hye-Young Paik. The published paper title is Scalable and Privacy-Preserving Deepfake Detection Framework. The work investigated privacy-preserving verification of deepfake-related content on Hyperledger Fabric, using Redis, xxHash, perceptual hashing, and Idemix zero-knowledge proofs.',
           },
           {
             type: 'text',

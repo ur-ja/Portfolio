@@ -6,12 +6,13 @@ export default function Thesis() {
   return (
     <TextProjectTile
       href='/projects/sdlt-deepfake-framework'
-      ariaLabel='Open SDLT deepfake detection research case study'
+      ariaLabel='Open privacy-preserving deepfake detection case study'
       variant={SEGMENT_TILE_VARIANT.experience}
       size='tall'
       dates='2024 to 2025'
-      title='Best Paper, SDLT 2025'
-      description='Honours thesis on scalable, privacy-preserving deepfake detection. Published and awarded Best Paper at the Symposium on Distributed Ledger Technology.'
+      title='Privacy-Preserving Deepfake Detection'
+      subtitle='Best Paper, SDLT 2025'
+      description='Honours thesis on scalable deepfake verification with Hyperledger Fabric. Published by Springer.'
       footer='Honours Class I · Springer proceedings'
     />
   );

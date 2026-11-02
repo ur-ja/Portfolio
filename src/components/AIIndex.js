@@ -11,7 +11,7 @@ export default function AIIndex() {
       size='wide'
       dates='August 2025 to present'
       title='AI Index for Australia'
-      description='One of two engineers on data pipelines and a config-driven dashboard for AI Index Australia.'
+      description='One of two engineers building AI Index Australia, contributing research data pipelines, cross-source linkages and a config-driven dashboard.'
       footer='Python · React · Postgres · ARDC Nectar'
     />
   );

@@ -148,6 +148,20 @@ export default function ProjectCaseStudy({ project }: ProjectCaseStudyProps) {
         <p className="text-lg leading-relaxed text-gray-800 mb-6">
           {project.summary}
         </p>
+        {project.highlights && project.highlights.length > 0 ? (
+          <div className="mb-6 rounded-2xl bg-white ring-1 ring-black/5 p-5">
+            <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase mb-3">
+              My contributions
+            </h2>
+            <ul className="list-disc list-outside ml-5 space-y-2 text-base text-gray-700">
+              {project.highlights.map((item) => (
+                <li key={item} className="leading-relaxed">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <div className="flex flex-wrap gap-2 mb-6">
           {project.tags.map((tag) => (
             <span

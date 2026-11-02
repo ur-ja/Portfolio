@@ -42,6 +42,13 @@ function renderProject(project: Project): string {
     `Tile: ${project.tileDescription}`,
   ];
 
+  if (project.highlights?.length) {
+    lines.push('', 'Highlights:');
+    for (const item of project.highlights) {
+      lines.push(`- ${item}`);
+    }
+  }
+
   if (project.heroImage) {
     const caption = project.heroImage.caption
       ? ` Caption: ${project.heroImage.caption}`
@@ -157,6 +164,7 @@ export function buildProfileJson() {
       organisation: project.organisation,
       dates: project.dates,
       summary: project.summary,
+      highlights: project.highlights ?? [],
       segments: project.segments,
       tags: project.tags,
       tileDescription: project.tileDescription,

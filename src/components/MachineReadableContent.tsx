@@ -104,6 +104,13 @@ export default function MachineReadableContent() {
               </p>
               <p>{project.summary}</p>
               <p>{project.tileDescription}</p>
+              {project.highlights && project.highlights.length > 0 ? (
+                <ul>
+                  {project.highlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              ) : null}
               <p>Tags: {project.tags.join(', ')}</p>
               {project.sections.map((section) => (
                 <section key={`${project.slug}-${section.title}`}>

@@ -29,6 +29,7 @@ export default function TextProjectTile({
   size = 'square',
   dates,
   title,
+  subtitle,
   description,
   footer,
 }) {
@@ -52,7 +53,12 @@ export default function TextProjectTile({
 
       <div>
         <p className={`text-xs sm:text-sm ${dateMargin} ${v.date}`}>{dates}</p>
-        <h1 className={`font-bold mb-2 sm:mb-3 leading-snug ${titleClass}`}>{title}</h1>
+        <h1 className={`font-bold mb-1 sm:mb-2 leading-snug ${titleClass}`}>{title}</h1>
+        {subtitle ? (
+          <p className={`text-xs sm:text-sm font-medium mb-2 sm:mb-3 ${v.date}`}>
+            {subtitle}
+          </p>
+        ) : null}
         <p className={`${bodyClass} ${v.body}`}>{description}</p>
       </div>
 
