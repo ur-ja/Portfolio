@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { profile } from '../data/profile';
 
 export default function About() {
   const images = ['/memoji-smile.png', '/memoji-heart.png'];
@@ -7,6 +8,7 @@ export default function About() {
   const handleImageClick = () => {
     setImageIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
   };
+
   return (
     <div className=''>
       <button
@@ -34,14 +36,12 @@ export default function About() {
         className={`h-20 md:h-32 ${imageIndex === 0 ? 'fade-in' : 'fade-out'}`}
       />
       <p className='p-4 font-poppins font-light md:text-md text-sm'>
-        Hi! I'm{' '}
-        <span className='mx-1 text-lg md:text-2xl font-extrabold'>urja</span>.
-        I'm one of two engineers building Australia's first national AI Index at
-        UNSW, where I also work on research teaching small models to classify patents.
-        On the side I build things for people who need them, most recently a document
-        system for a manufacturer in India whose drawings all lived in paper files.
+        Hi! I&apos;m{' '}
+        <span className='mx-1 text-lg md:text-2xl font-extrabold'>
+          {profile.shortName}
+        </span>
+        . {profile.aboutAfterName}
       </p>
-
     </div>
   );
 }

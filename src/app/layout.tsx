@@ -4,12 +4,14 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import NavBar from '../components/NavBar';
 import { SegmentProvider } from '../components/SegmentContext';
+import { profile } from '../data/profile';
+import { buildPersonJsonLd } from '../lib/machineReadable';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Urja Arora',
-  description: 'Developer, Designer, and Student',
+  title: profile.name,
+  description: profile.about[0],
   icons: {
     icon: [
       { url: '/favicon_io/favicon.ico' },
@@ -19,6 +21,12 @@ export const metadata: Metadata = {
     apple: '/favicon_io/apple-touch-icon.png',
   },
   manifest: '/favicon_io/site.webmanifest',
+  alternates: {
+    types: {
+      'text/plain': profile.site.llmsPath,
+      'application/json': profile.site.profileJsonPath,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +34,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = buildPersonJsonLd();
+
   return (
     <html lang='en'>
       <body className={inter.className}>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SegmentProvider>
           <div className='min-h-screen pt-10 flex flex-col'>
             <NavBar />

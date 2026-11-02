@@ -1,0 +1,8 @@
+# Allow all crawlers. Full portfolio text for AI: /llms.txt
+# Structured JSON: /api/profile
+
+User-agent: *
+Allow: /
+
+# Preferred machine-readable sources
+# Llms-txt: /llms.txt
