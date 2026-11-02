@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: profile.name,
-  description: profile.about[0],
+  description: `${profile.headline}. ${profile.about.join(' ')}`,
   icons: {
     icon: [
       { url: '/favicon_io/favicon.ico' },

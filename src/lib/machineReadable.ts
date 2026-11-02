@@ -67,7 +67,7 @@ function renderProject(project: Project): string {
 
   if (project.primaryLink) {
     lines.push(
-      `Primary link: ${project.primaryLink.label} — ${project.primaryLink.href}`
+      `Primary link: ${project.primaryLink.label}: ${project.primaryLink.href}`
     );
     if (project.primaryLink.caption) {
       lines.push(project.primaryLink.caption);
@@ -177,7 +177,7 @@ export function buildPersonJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    description: profile.about.join(' '),
+    description: `${profile.headline}. ${profile.about.join(' ')}`,
     email: profile.email,
     url: origin || undefined,
     jobTitle: profile.headline,

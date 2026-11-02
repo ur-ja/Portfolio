@@ -8,10 +8,10 @@ export default function Devsoc() {
       href='/projects/devsoc'
       ariaLabel='Open DevSoc case study'
       variant={SEGMENT_TILE_VARIANT.experience}
-      size='wide'
+      size='tall'
       dates='March 2023 to November 2025'
       title='DevSoc'
-      description='Freerooms, Unilectives, and Director on Bridges. Three years shipping student-facing apps at UNSW.'
+      description='Freerooms and Unilectives as a frontend contributor, then Director on Bridges. Three years of team engineering at UNSW.'
       footer='Frontend Engineer to Director · React · Next.js'
     />
   );

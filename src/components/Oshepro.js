@@ -11,7 +11,7 @@ export default function Oshepro() {
       size='tall'
       dates='July to December 2023'
       title='Oshepro EHS Platform'
-      description='UX redesign across SHEMa, AMLA, and TRACI so safety teams could complete forms without getting stuck.'
+      description='UX design (not engineering) across SHEMa, AMLA, and TRACI for non-technical safety teams.'
       footer='UX Designer · Figma · Enterprise'
     />
   );

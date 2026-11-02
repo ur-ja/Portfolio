@@ -35,11 +35,13 @@ export default function About() {
         alt='Memoji'
         className={`h-20 md:h-32 ${imageIndex === 0 ? 'fade-in' : 'fade-out'}`}
       />
-      <p className='p-4 font-poppins font-light md:text-md text-sm'>
+      <p className='p-4 font-poppins font-light md:text-md text-sm leading-relaxed'>
         Hi! I&apos;m{' '}
-        <span className='mx-1 text-lg md:text-2xl font-extrabold'>
+        <span className='mx-0.5 text-lg md:text-2xl font-extrabold'>
           {profile.shortName}
         </span>
+        , I&apos;m a{' '}
+        <span className='font-extrabold'>{profile.headline.toLowerCase()}</span>
         . {profile.aboutAfterName}
       </p>
     </div>

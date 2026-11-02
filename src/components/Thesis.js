@@ -9,9 +9,9 @@ export default function Thesis() {
       ariaLabel='Open SDLT deepfake detection research case study'
       variant={SEGMENT_TILE_VARIANT.experience}
       size='tall'
-      dates='November 2025'
+      dates='2024 to 2025'
       title='Best Paper, SDLT 2025'
-      description='Honours thesis on scalable, privacy-preserving deepfake detection. Published and presented at the Symposium on Distributed Ledger Technology.'
+      description='Honours thesis on scalable, privacy-preserving deepfake detection. Published and awarded Best Paper at the Symposium on Distributed Ledger Technology.'
       footer='Honours Class I · Springer proceedings'
     />
   );

@@ -3,19 +3,20 @@
 export const profile = {
   name: 'Urja Arora',
   shortName: 'urja',
-  headline: 'Developer, Designer, and Student',
+  headline: 'Software Engineer',
   location: {
     primary: 'Sydney, NSW, Australia',
     secondary: 'Delhi, India',
     note: 'Based in Sydney; also connected to Delhi.',
   },
-  /** Full bio as a single string for machines / meta. */
+  /** Full bio paragraphs for machines / meta / crawlable HTML. */
   about: [
-    "Hi! I'm urja. I'm one of two engineers building Australia's first national AI Index at UNSW, where I also work on research teaching small models to classify patents. On the side I build things for people who need them, most recently a document system for a manufacturer in India whose drawings all lived in paper files.",
+    "Hi! I'm urja, I'm a software engineer. I build software that solves practical problems, from secure backend systems and data pipelines to user-facing applications.",
+    'Currently one of two engineers building AI Index Australia at UNSW. Previously built an internal operations platform for a manufacturer in India and a mobile HR survey application at VVDN.',
   ],
-  /** Body after the styled short name on the About tile. */
+  /** Body after "Hi! I'm urja, I'm a software engineer." on the About tile. */
   aboutAfterName:
-    "I'm one of two engineers building Australia's first national AI Index at UNSW, where I also work on research teaching small models to classify patents. On the side I build things for people who need them, most recently a document system for a manufacturer in India whose drawings all lived in paper files.",
+    'I build software that solves practical problems, from secure backend systems and data pipelines to user-facing applications. Currently one of two engineers building AI Index Australia at UNSW. Previously built an internal operations platform for a manufacturer in India and a mobile HR survey application at VVDN.',
   email: 'urjaarora048@gmail.com',
   links: {
     resume:
@@ -33,7 +34,7 @@ export const profile = {
   seeds: {
     title: 'Seeds',
     description:
-      'A little idea garden on the side. Plant something you want to build, water what catches your eye, and watch the good ones sprout. Not a project case study — interactive community ideas planted by visitors.',
+      'A little idea garden on the side. Plant something you want to build, water what catches your eye, and watch the good ones sprout. Not a project case study; interactive community ideas planted by visitors.',
   },
 } as const;
 

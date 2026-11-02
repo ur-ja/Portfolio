@@ -11,16 +11,16 @@ import {
   type SegmentId,
 } from '../../data/segments';
 
-/** Reverse-chronological listing order for the projects index. */
+/** Recruiter-facing listing order for the projects index. */
 const INDEX_ORDER = [
-  'global-gears',
-  'patent-classification',
-  'whereabouts',
   'ai-index-australia',
+  'global-gears',
   'sdlt-deepfake-framework',
-  'devsoc',
   'vvdn-hr-survey',
+  'devsoc',
+  'patent-classification',
   'oshepro',
+  'whereabouts',
 ];
 
 function sortProjects(list: Project[]): Project[] {

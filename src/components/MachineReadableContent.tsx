@@ -33,7 +33,9 @@ export default function MachineReadableContent() {
     <div className='sr-only' data-machine-readable='true'>
       <article>
         <h1>{profile.name}</h1>
-        <p>{profile.headline}</p>
+        <p>
+          <strong>{profile.headline}</strong>
+        </p>
         {profile.about.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}

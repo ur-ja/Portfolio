@@ -69,7 +69,7 @@ export const projects: Project[] = [
     dates: 'August 2025 to present',
     segments: ['experience'],
     summary:
-      "One of two engineers at Trustworthy Digital Society building Australia's first AI Index. The project brings together research, grants, patents, and talent data through a pipeline and interactive dashboard focused on the Australian AI landscape.",
+      "One of two engineers on AI Index Australia, a public dashboard and data platform for AI-related research activity in Australia. I own specific ingestion pipelines, quality linkages, and parts of the config-driven frontend on a shared React, FastAPI, and PostgreSQL stack hosted on ARDC Nectar.",
     tags: ['Data Pipelines', 'Full-Stack', 'Python', 'React', 'Postgres'],
     tileDescription:
       'Data pipelines and interactive dashboard for AI Index Australia at Trustworthy Digital Society.',
@@ -80,55 +80,61 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        title: 'The project',
+        title: 'Overview',
         blocks: [
           {
             type: 'text',
             content:
-              "Each year, Stanford HAI publishes the AI Index, a widely referenced report on the state of artificial intelligence globally. While comprehensive, Australian data is typically aggregated within broader regional groupings, which limits visibility into local trends.",
+              "AI Index Australia is a public dashboard and data pipeline for AI-related research and activity in Australia. It is built through Trustworthy Digital Society, a joint UNSW and UTS initiative. The platform integrates eight external datasets and serves interactive visualisations over publications, grants, patents, and talent mobility.",
           },
           {
             type: 'text',
             content:
-              "AI Index Australia addresses this gap. Developed through Trustworthy Digital Society, a joint research initiative between UNSW and UTS, the project provides an interactive, Australia-specific view of AI activity. Work to date has focused on the research and development domain, covering publications, grants, patents, and talent mobility. The team is in early discussions with Stanford HAI regarding longer-term collaboration.",
+              "I am one of two engineers on the platform. The work is shared: I own specific pipelines, linkages, and frontend architecture pieces described below. I do not claim sole ownership of every dataset integration or every chart on the site.",
           },
           {
             type: 'text',
-            content: `See the [official UNSW project page](${TDS_AI_INDEX_URL}) for the AI Index, where my colleague and I walk through the dashboard on video.`,
+            content: `See the [official UNSW project page](${TDS_AI_INDEX_URL}) for a walkthrough of the dashboard.`,
           },
         ],
       },
       {
-        title: 'What I built',
+        title: 'My contributions',
         blocks: [
           {
             type: 'text',
             content:
-              "I work as one of two engineers on a four-person team at Trustworthy Digital Society. Working closely with my colleague and our stakeholders has shaped much of how I approach engineering problems. My responsibilities span the full data stack, from ingestion and processing through to the dashboard layer: sourcing data from external APIs, normalising disparate datasets, building cross-source linkages, and delivering interactive visualisations.",
+              "Within the engineering team, my contributions include:",
+          },
+          {
+            type: 'bullets',
+            items: [
+              'ORCID data ingestion for talent mobility analysis (researcher movement into and out of Australia).',
+              'PATSTAT ingestion and DOCDB patent-family methodology for international patent family views.',
+              'Linking OpenAlex publications to Scimago journal rankings and CORE conference rankings.',
+              'DBLP XML ingestion into a local SQLite FTS5 search index, with title normalisation, token-based matching, and year proximity. Records below the matching threshold stay unranked rather than receiving an unreliable ranking.',
+              'A configuration-driven frontend architecture used across 37 charts, so new visualisations can be added through configuration instead of one-off frontend rewrites.',
+              'Auth0 SSO with email verification, plus a PostgreSQL-backed user allowlist that gates access to the data pages.',
+            ],
           },
           {
             type: 'text',
             content:
-              "Key contributions include linking OpenAlex publications to quality indicators, using Scimago for journal rankings and CORE for conference rankings. Matching conferences to publications required building a DBLP full-text search index, because conference naming has none of the standardisation that journal publishing does: the same venue appears as an abbreviation, a full name, with and without the year, in variants that never match on string comparison. I also developed patent ingestion pipelines from IP RAPID and PATSTAT, implemented AI classification across all data sources, and built talent mobility tracking from ORCID to analyse researcher movement in and out of Australia.",
-          },
-          {
-            type: 'text',
-            content:
-              "This sits on a modular Python pipeline for collection, ingestion, and post-processing, paired with a config-driven React frontend and FastAPI backend. The architecture is designed so new data sources can be integrated without restructuring the existing system.",
+              "Conference matching needed the DBLP index because venue names are inconsistent: the same conference appears as an abbreviation, a full name, with or without a year, in forms that never match on simple string comparison. Leaving low-confidence matches unranked was a deliberate choice so quality signals stay trustworthy.",
           },
           {
             type: 'image',
             src: `${IMG}/filter-ui.png`,
             alt: 'Dashboard filter panel showing chapter, section, and topic selectors',
             caption:
-              'The dashboard is config-driven, allowing new visualisations to be added through configuration rather than frontend rewrites.',
+              'Config-driven filters: chapter, section, and topic selectors that drive the chart layer.',
           },
           {
             type: 'image',
             src: `${IMG}/sankey-grants.png`,
             alt: 'Sankey diagram linking grant fields to AI publication topics',
             caption:
-              'Cross-source linkage between grant fields of research and AI publication outcomes in the CSO taxonomy.',
+              'Cross-source linkage between grant fields of research and AI publication outcomes in the CSO taxonomy. Grant-publication linking work owned by a colleague is not claimed here.',
           },
         ],
       },
@@ -138,12 +144,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              "The dashboard allows researchers and stakeholders to filter by year, topic, and visualisation type, then explore the underlying data interactively. It has been presented to audiences across UNSW and the broader research community.",
-          },
-          {
-            type: 'text',
-            content:
-              "Access is controlled in two layers. An email allowlist in the application database determines who can reach the data pages. Authentication is handled through Auth0 SSO, with email verification to ensure account integrity. For stakeholder sessions, access is provisioned by adding professional email addresses to the allowlist prior to sign-up.",
+              "Researchers and stakeholders can filter by year, topic, and visualisation type, then explore the underlying data. Access uses two layers: Auth0 SSO with email verification, and an email allowlist stored in PostgreSQL. Stakeholder access is provisioned by adding professional emails to that list before sign-up.",
           },
           {
             type: 'image',
@@ -172,12 +173,12 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              "The project is hosted entirely on ARDC Nectar, including compute VMs, the Postgres database, object storage, and the production website. Data pipeline jobs populate the database, which the FastAPI backend queries and the React frontend renders as interactive charts.",
+              "The stack includes a React and TypeScript frontend, a Python and FastAPI backend, PostgreSQL, ingestion pipelines, and chart visualisations. Everything runs on ARDC Nectar: compute VMs, the database, object storage, and the production site.",
           },
           {
             type: 'text',
             content:
-              "The data pipeline uses Python, pandas, SQLAlchemy, and Postgres, with OpenStack Swift for object storage. The web application is built with React, TypeScript, Vite, and Tailwind, with Chart.js, Recharts, and D3 for visualisation. The backend runs on FastAPI with Auth0 for authentication, deployed via Docker and GitLab CI. Data is sourced from OpenAlex, ORCID, the ARC, Scimago, CORE, IP RAPID, and PATSTAT.",
+              "Pipeline work uses Python, pandas, SQLAlchemy, and Postgres, with OpenStack Swift for object storage. The web app uses React, TypeScript, Vite, and Tailwind, with Chart.js, Recharts, and D3. Auth0 handles authentication. Deployments go through Docker and GitLab CI. Sources include OpenAlex, ORCID, ARC, Scimago, CORE, IP RAPID, PATSTAT, and DBLP.",
           },
         ],
       },
@@ -207,13 +208,13 @@ export const projects: Project[] = [
     title: 'Global Gears work order system',
     role: 'Software Engineer (Contract)',
     organisation: 'Global Gears India Pvt. Ltd.',
-    dates: '2026 to present',
+    dates: '2026, deployed',
     segments: ['experience'],
     summary:
-      'A work order and document system for a gear manufacturer in Ghaziabad. Everyone in the company needs the drawings and specifications for a job, but the purchase orders attached to that same job carry the rates, and those are commercially sensitive. The system had to serve both needs out of one set of documents, which meant building proper access levels rather than a shared folder. I was the only engineer on the project, from the first conversation through to deployment.',
+      'Sole engineer on an internal operations system for a ~14-person gear manufacturer. Searchable work orders and attachments, with purchase-order pricing restricted to three authorised people. Deployed in October 2026 with the first work orders onboarded. My current involvement is ad hoc support.',
     tags: ['Full-Stack', 'Security', 'Postgres', 'Next.js', 'TypeScript'],
     tileDescription:
-      'Work order and document system for a gear manufacturer: access rules in the database, not the UI.',
+      'Work orders and documents for a gear manufacturer, with access levels so priced files stay with the few people who need them.',
     primaryLink: {
       href: 'https://global-gears-register.vercel.app/',
       label: 'Open live system',
@@ -226,37 +227,37 @@ export const projects: Project[] = [
     },
     sections: [
       {
+        title: 'Overview',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'Global Gears is a gear manufacturer with about fourteen staff in Ghaziabad. Orders, documents, and technical drawings previously lived across a shared inbox and paper files. I was the only engineer from the first conversation through deployment.',
+          },
+          {
+            type: 'text',
+            content:
+              'I built a searchable work-order system with attachments. Drawings and quality documents are available to the floor. Purchase orders carry pricing and stay restricted to three authorised people. The system was deployed and the first work orders were onboarded in October 2026. I now provide ad hoc support rather than ongoing product development.',
+          },
+        ],
+      },
+      {
         title: 'The problem',
         blocks: [
           {
             type: 'text',
             content:
-              'Global Gears is a gear manufacturer with about fourteen staff. Purchase orders and engineering drawings arrived by email into a single inbox, were printed, and were carried down to the manufacturing floor. The printing was never the problem and still happens.',
+              'Once documents existed, nobody could find them again. Answering a question about an order meant asking whoever had opened the email.',
           },
           {
             type: 'text',
             content:
-              'The first problem was that once documents existed, nobody could find them again. Everything lived in one inbox and on paper, so answering a question about an order meant asking the person who had opened the email.',
+              'Pricing made a shared folder unsafe. A client purchase order shows what the customer pays. Supplier purchase orders show what the company pays for forging, heat treatment, and related work. Together those numbers reveal the margin on the job. In a small industry, rates that circulate affect later quotes, so priced documents need a small authorised set. Everything else on the job still has to be open to production and quality.',
           },
           {
             type: 'text',
             content:
-              'The second problem was pricing. A client\'s purchase order shows what the customer is paying. The purchase orders the company sends its own suppliers show what it pays for forging, heat treatment and so on. Put the two together and you have the margin on the job, which is close to the most sensitive number the business has. In an industry this size, rates that start circulating affect what the company can quote later, so the number of people who can open a priced document needs to stay as small as the work allows. Everything else, the drawings, the inspection reports, the quality plans, has to be open to the whole floor, because that is what the job runs on.',
-          },
-        ],
-      },
-      {
-        title: 'Why I didn\'t use an off-the-shelf tool',
-        blocks: [
-          {
-            type: 'text',
-            content:
-              'I spent a while looking at Google Drive before writing any code, and two shared drives would have worked technically. The problem was that it depends on people filing things correctly. Every new order would require someone to name a folder exactly right and put the purchase order in the restricted drive, and if either went wrong there would be no indication of it. A priced document sitting in the open drive looks exactly like one that belongs there.',
-          },
-          {
-            type: 'text',
-            content:
-              'Building something custom moves that work from every order at runtime to one time during the build. This mattered because the client had told me plainly that they couldn\'t enforce filing discipline, and the people who would have been responsible for getting it right every time were the two the project was meant to help.',
+              'I looked at Google Drive first. Two shared drives would have worked technically, but only if people filed every order correctly forever. A priced document in the open drive looks identical to one that belongs there. The client said they could not enforce that discipline, so the rules had to live in the system rather than in habits.',
           },
         ],
       },
@@ -266,17 +267,20 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Access is organised as three levels rather than per-document permissions, which keeps it explainable to the people using it.',
+              'Access is three privilege levels, not per-document permissions, so it stays explainable:',
+          },
+          {
+            type: 'bullets',
+            items: [
+              'Full access (director and procurement): create work orders, change status, open priced documents, manage other people\'s access.',
+              'Pricing access (accounts): open priced documents, but cannot create orders or manage access.',
+              'Standard access (production and quality): find orders, download drawings, upload documents. Never open a priced document.',
+            ],
           },
           {
             type: 'text',
             content:
-              'Full access covers the director and the person who runs procurement. They can create work orders, change status, open priced documents and manage everyone else\'s access. Pricing access covers accounts, who can open priced documents but cannot create orders or change anyone\'s access. Standard access covers production and quality control, which is most of the company, and allows finding orders, downloading drawings and uploading documents, but never opens a priced document.',
-          },
-          {
-            type: 'text',
-            content:
-              'The levels are named for privilege rather than department, so someone moving between teams doesn\'t require anybody to reinterpret what their role means. In practice this means three people can open a priced document and eleven cannot, and the People screen shows that count at the top, because it is the question the director keeps asking.',
+              'Levels are named for privilege rather than department. In practice three people can open a priced document and eleven cannot. The People screen shows that count because it is the question the director keeps asking.',
           },
           {
             type: 'image',
@@ -293,32 +297,32 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'The access rules are in the database rather than the interface, so the system behaves correctly even if the application code has a bug in it.',
+              'Access rules live in the database, not only in the UI, so a frontend bug cannot quietly expose a purchase order.',
           },
           {
             type: 'text',
             content:
-              'Purchase orders have their own table and their own storage bucket instead of sitting in the general document table behind a flag. If they shared a table, every query written from then on would have to remember to exclude them, and a single forgotten filter would leak one.',
+              'Purchase-order records sit in a separate table, and files sit in a separate storage bucket. They are not general documents behind a boolean flag. Sharing a table would mean every future query has to remember to exclude them.',
           },
           {
             type: 'text',
             content:
-              'The purchase order bucket has no storage policy at all, which is intentional. Postgres row level security denies anything that no policy allows, so every request from a browser is refused, including requests from administrators. The only credential that opens the bucket is the service key, which lives in server environment variables and never reaches the browser.',
+              'The purchase-order bucket has no storage policy on purpose. In Postgres row-level security, a missing allow policy means deny. Browser requests are refused, including from administrators. The only credential that can open the bucket is the server service key, which never reaches the browser.',
           },
           {
             type: 'text',
             content:
-              'This means a purchase order can only be served by a server route. The route looks the record up by its id, derives the storage path from that record rather than taking it from the request, checks the caller\'s level through their own session, writes an audit entry, and then streams the file. The audit entry is written before any of the file is sent, and if that write fails the whole request fails.',
+              'A purchase order is therefore only served by a server route. The route looks up the record by id, derives the storage path from that database row (never from a client-supplied path), checks the active user record and role, writes an append-only audit entry, then streams the file. If the audit write fails, the request fails closed and no bytes are sent.',
           },
           {
             type: 'text',
             content:
-              'Access comes from holding an active row in the application\'s user table, not from having a valid session. The distinction matters because Supabase issues a session as soon as Google sign-in succeeds, which happens before any of my code runs. Checking whether someone is signed in therefore only tells you that they have a Google account.',
+              'Access depends on an active row in the application user table, not merely a successful Google login. Supabase issues a session as soon as Google sign-in succeeds, before application authorisation runs. A valid session only proves someone has a Google account.',
           },
           {
             type: 'text',
             content:
-              'The audit log cannot be written from the browser at all, and the server\'s own key has insert and select permissions but nothing else. The log is append-only even to the most privileged credential in the system, so a compromised or buggy server route could add entries to it but could not alter the ones already there. This matters because the honest control over a priced document is traceability rather than prevention. Anyone who can legitimately open a purchase order can photograph the screen, and the system doesn\'t pretend otherwise, but a leak points at one of three named people rather than being anonymous.',
+              'The audit log cannot be written from the browser. The server key can insert and select, nothing else, so the log is append-only even to the most privileged credential. Anyone who can open a purchase order can still photograph the screen. The system does not pretend otherwise. What it does provide is traceability: a leak points at one of three named people.',
           },
         ],
       },
@@ -328,22 +332,17 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Since the schema is doing the security work, reading through it carefully isn\'t sufficient. I wrote an adversarial test suite that runs against a local Postgres instance and currently holds 100 assertions.',
+              'Because the schema does the security work, reading it carefully is not enough. I wrote 100 database security assertions against a local Postgres instance across five identities plus anonymous and service roles: administrator, pricing user, ordinary floor user, removed employee, and a stranger who completed Google sign-in but was never added.',
           },
           {
             type: 'text',
             content:
-              'It covers five identities: an administrator, a user with pricing access, an ordinary floor user, an employee whose access has been removed, and a stranger who has completed Google sign-in but was never added to the system. It also tests the public anonymous key and the server\'s own key. Each assertion is a property of the database itself, so it holds regardless of what the application code does.',
+              'The suite found the most serious bug in the project, which I had introduced myself. Early policies checked whether the caller was signed in. That would have made work orders, documents, and drawings readable by anyone with a Gmail account and the public browser key. Access now derives from membership. Against the old schema the stranger could read data; against the current one they get nothing.',
           },
           {
             type: 'text',
             content:
-              'The suite found the most serious problem in the project, which I had introduced myself. The original policies checked whether the caller was signed in, which would have made every work order, document and drawing readable by anyone with a Gmail address and the public key that ships in the browser bundle by design. Access now derives from membership instead, and the suite demonstrates the difference in both directions: run it against the original schema and the stranger can read work orders, documents and notes, and run it against the current one and they get nothing back.',
-          },
-          {
-            type: 'text',
-            content:
-              'A second issue came from a change in the platform. Supabase stopped automatically granting table privileges on newly created projects, while the local development stack kept the previous behaviour. The result would have been a system where every test passed locally and every request failed in production. Privileges are now granted explicitly, the anonymous role has none at all, and the relevant test iterates over every table in the schema instead of a list I maintain by hand, so any table added later is covered automatically.',
+              'A second issue came from a platform change. Supabase stopped auto-granting table privileges on new projects while the local stack kept the old behaviour. Tests would have passed locally and failed in production. Privileges are now explicit, the anonymous role has none, and the privilege test iterates every table in the schema so new tables are covered automatically.',
           },
         ],
       },
@@ -353,22 +352,17 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Most of the staff are in their fifties and sixties and aren\'t confident with software. The director had previously needed help uploading photographs to Google Drive. One of the client\'s constraints was that the system couldn\'t require people to learn new habits, so it had to be usable without a training session.',
+              'Most staff are in their fifties and sixties and are not confident with software. One constraint was that the system could not require a training session.',
           },
           {
             type: 'text',
             content:
-              'The five document categories are always visible, with "None yet" shown under the empty ones, which gives every type of document a fixed home. Uploads sit inside each category section instead of behind a dropdown, so the category is determined by which button was pressed and nobody has to make a filing decision.',
+              'Five document categories are always visible, with "None yet" under empty ones. Uploads sit inside each category, so filing is determined by which button was pressed. Priced documents use a visually distinct block rather than a confirmation dialog. For standard access that block is not greyed out; it is simply not rendered.',
           },
           {
             type: 'text',
             content:
-              'Priced documents are shown in a visually distinct block instead of behind a confirmation dialog. The person in accounts opens purchase orders often enough that a dialog would become muscle memory within a couple of weeks, whereas a visual difference doesn\'t wear off. For everyone on standard access that block isn\'t greyed out, it simply isn\'t rendered, so they never discover there is something they cannot see.',
-          },
-          {
-            type: 'text',
-            content:
-              'Legibility was treated as a requirement rather than a finishing touch, with a minimum type size, a contrast floor and a minimum touch target size, all measured rather than judged by eye. The system also generates the cover sheet that was previously typed by hand for every order, and assigns work order numbers itself.',
+              'Legibility was treated as a requirement: minimum type size, contrast floor, and touch targets, measured rather than judged by eye. The system also generates the cover sheet that used to be typed by hand and assigns work order numbers itself.',
           },
           {
             type: 'image',
@@ -392,17 +386,17 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Next.js (App Router), TypeScript, Tailwind, Supabase for Postgres, Auth and Storage, Postgres row level security, SQL migrations, Vercel and Google OAuth.',
+              'Next.js App Router, TypeScript, React, Tailwind, shadcn/ui, Supabase Postgres, Auth, and Storage, SQL migrations, Google OAuth, and Vercel.',
           },
           {
             type: 'text',
             content:
-              'Both the database and the serverless functions are pinned to the Mumbai region, so files showing the company\'s rates don\'t leave India in transit. The purchase order route runs on the Node runtime rather than Edge because edge functions can\'t be pinned to a specific region.',
+              'Database and serverless functions are pinned to Mumbai so priced files do not leave India in transit. The purchase-order route uses the Node runtime rather than Edge because edge functions cannot be pinned to a region.',
           },
           {
             type: 'text',
             content:
-              'The project keeps a written decision record alongside the code, which captures the reasoning behind each choice and not only the conclusion, and gets updated whenever something changes. A number of decisions were overturned during the build, including how purchase orders are delivered, the numbering scheme and the entire sign-in model, and those reversals are recorded with their reasons as well.',
+              'A written decision record sits beside the code and records why choices changed, including purchase-order delivery, numbering, and the sign-in model.',
           },
         ],
       },
@@ -416,49 +410,6 @@ export const projects: Project[] = [
     linksNote: 'The code is private, since it belongs to a real company.',
   },
   {
-    slug: 'patent-classification',
-    title: 'Teaching a small model to classify patents',
-    role: 'Research Assistant',
-    organisation: 'Trustworthy Digital Society (UNSW × UTS)',
-    dates: '2026 to present',
-    segments: ['experience'],
-    summary:
-      'Early-stage research on teaching a small, local model to classify patents and explain its choice, using reasoning from a larger model as the teaching signal. Work with a colleague at Trustworthy Digital Society. Paper in progress.',
-    tags: ['Research', 'Machine Learning', 'LLMs', 'Python'],
-    tileDescription:
-      'Early-stage research on local patent classification with explanations. Paper in progress.',
-    sections: [
-      {
-        title: 'The idea',
-        blocks: [
-          {
-            type: 'text',
-            content:
-              'Patent classification is slow expert work against a large hierarchy of codes. Large models can help, but they are expensive to run at scale, and patent applications cannot be sent to external APIs. The goal is a small model that can run locally, assign a code, and give a reason for it.',
-          },
-        ],
-      },
-      {
-        title: 'Status',
-        blocks: [
-          {
-            type: 'text',
-            content:
-              'This work is still in development. More detail will go up when the paper is further along.',
-          },
-        ],
-      },
-    ],
-    links: [
-      {
-        label: 'Trustworthy Digital Society',
-        href: TDS_URL,
-      },
-    ],
-    // TODO: add paper link when published
-    linksNote: 'Nothing else yet. Paper in progress.',
-  },
-  {
     slug: 'sdlt-deepfake-framework',
     title: 'Scalable and Privacy-Preserving Deepfake Detection Framework',
     role: 'Honours Thesis Author',
@@ -466,38 +417,23 @@ export const projects: Project[] = [
     dates: '2024 to 2025',
     segments: ['experience'],
     summary:
-      'Honours thesis on making deepfake detection scalable and privacy-preserving on the blockchain. Published at SDLT 2025 and awarded Best Paper at the symposium.',
+      'Honours thesis on privacy-preserving deepfake-related verification using Hyperledger Fabric. In evaluation, the framework reduced blockchain load by 91% and completed 90% of verification operations in under 100 ms. Published by Springer and awarded Best Paper at SDLT 2025.',
     tags: ['Research', 'Blockchain', 'Privacy', 'Python', 'Hyperledger'],
     tileDescription:
-      'Honours thesis published at SDLT 2025 and awarded Best Paper. A privacy-preserving deepfake detection framework built on Hyperledger Fabric.',
+      'Honours thesis on scalable, privacy-preserving deepfake detection. Published and awarded Best Paper at SDLT 2025.',
     sections: [
       {
-        title: 'The project',
+        title: 'Overview',
         blocks: [
           {
             type: 'text',
             content:
-              'This work formed my honours thesis at UNSW Sydney, under the supervision of Dr Hye-Young Paik. Her guidance throughout the research process was central to how the project took shape. Deepfakes spread quickly across social media, but most detection systems struggle to scale without compromising user privacy. The research focused on improving DDS, an existing blockchain-based deepfake detection framework, to handle high-throughput verification while keeping identities protected.',
+              'This was my Software Engineering Honours thesis at UNSW Sydney, supervised by Dr Hye-Young Paik. The work investigated privacy-preserving verification of deepfake-related content on Hyperledger Fabric, using Redis, xxHash, perceptual hashing, and Idemix zero-knowledge proofs.',
           },
           {
             type: 'text',
             content:
-              'The approach combined hash-based content filtration with IncogniSense, a privacy-preserving voting protocol, to filter and verify AI-generated media efficiently within the DDS architecture. The result is a system designed for deployment in settings where both integrity and anonymity matter.',
-          },
-        ],
-      },
-      {
-        title: 'What I built',
-        blocks: [
-          {
-            type: 'text',
-            content:
-              'I designed and implemented a two-stage filtration pipeline using xxHash and perceptual hashing (pHash) to catch duplicate and near-duplicate content before it reaches the blockchain. This cut redundant on-chain verifications significantly. On top of that, I extended the IncogniSense protocol with a reputation-weighted voting mechanism using zero-knowledge proofs (Idemix) so users could participate anonymously without sacrificing result quality.',
-          },
-          {
-            type: 'text',
-            content:
-              'The prototype integrated Redis for off-chain caching and Hyperledger Fabric for distributed ledger operations. The architecture was built to be deployable in real-world, privacy-aware detection scenarios rather than remaining a theoretical contribution.',
+              'Deepfake content spreads quickly, but blockchain-backed detection systems struggle to stay fast without weakening privacy. The research improved an existing deepfake detection framework (DDS) with a two-stage filtering approach and a privacy-preserving voting protocol.',
           },
         ],
       },
@@ -507,22 +443,33 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Evaluation showed a 91% reduction in blockchain load through the filtration layer, with 90% of verification requests resolved in under 100ms via caching and duplicate detection. The privacy protocol demonstrated user anonymity, vote unlinkability, and Sybil resistance under the experimental conditions tested.',
+              'These figures are from evaluating the framework under the experimental conditions in the thesis. They are not presented as universal benchmarks.',
           },
           {
-            type: 'text',
-            content:
-              'The main engineering challenge was balancing cryptographic privacy with throughput. Zero-knowledge proofs and pseudonym transfers add overhead, and tuning perceptual hash thresholds to catch near-duplicates without false positives required careful iteration across inconsistent deepfake datasets.',
+            type: 'bullets',
+            items: [
+              '91% reduction in blockchain load through the two-stage filtration layer.',
+              '90% of verification operations completed in under 100 ms via caching and duplicate detection.',
+              'Privacy properties demonstrated in evaluation: anonymity, vote unlinkability, and Sybil resistance.',
+              'Published by Springer in the SDLT 2025 proceedings (DOI: https://doi.org/10.1007/978-981-95-9230-2_13).',
+              'Best Paper award at SDLT 2025, the 9th International Symposium on Distributed Ledger Technology at Deakin University, Melbourne, November 2025.',
+              'Honours Class I at UNSW for this work.',
+            ],
           },
         ],
       },
       {
-        title: 'Recognition',
+        title: 'What I built',
         blocks: [
           {
             type: 'text',
             content:
-              'The paper was published in the proceedings of the 9th Symposium on Distributed Ledger Technology (SDLT 2025), held at Deakin University in November 2025. It received the Best Paper award at the symposium. I was awarded Honours Class I at UNSW for this work.',
+              'I designed and implemented a two-stage filtration pipeline using xxHash and perceptual hashing (pHash) to catch duplicate and near-duplicate content before it reaches the blockchain. I also extended the IncogniSense protocol with reputation-weighted voting using Idemix zero-knowledge proofs so participants could stay anonymous without discarding result quality.',
+          },
+          {
+            type: 'text',
+            content:
+              'The prototype used Redis for off-chain caching and Hyperledger Fabric for ledger operations. The main engineering tension was cryptographic privacy versus throughput: zero-knowledge proofs add cost, and perceptual-hash thresholds need careful tuning to catch near-duplicates without too many false positives.',
           },
         ],
       },
@@ -532,12 +479,16 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Python, Hyperledger Fabric, Redis, xxHash, and pHash. The system was evaluated as an end-to-end prototype covering content filtration, privacy-preserving consensus, and blockchain integration.',
+              'Python, Hyperledger Fabric, Redis, xxHash, perceptual hashing (pHash), and Idemix. Evaluated as an end-to-end prototype covering filtration, privacy-preserving consensus, and blockchain integration.',
           },
         ],
       },
     ],
     links: [
+      {
+        label: 'Springer DOI',
+        href: 'https://doi.org/10.1007/978-981-95-9230-2_13',
+      },
       {
         label: 'Published paper (Springer)',
         href: 'https://www.springerprofessional.de/en/scalable-and-privacy-preserving-deepfake-detection-framework/52503022',
@@ -560,10 +511,10 @@ export const projects: Project[] = [
     dates: 'March to May 2024',
     segments: ['experience'],
     summary:
-      'Built a full-stack HR survey app during my internship on the Cloud & Apps Engineering team. Flutter frontend, Django REST backend, shipped a prototype that HR now uses internally.',
+      'Software Engineer Intern at VVDN Technologies (March to May 2024). Built a Flutter Android and iOS HR survey app with a Django REST and PostgreSQL backend. HR adopted the application after the internship, expanded it, and continues to use it.',
     tags: ['Flutter', 'Django', 'Full-Stack', 'Mobile', 'PostgreSQL'],
     tileDescription:
-      'Full-stack HR survey app built at VVDN Technologies. Flutter and Django, now in active use by the HR department.',
+      'Full-stack HR survey app built during my internship. Flutter and Django, now in active use by the HR department.',
     imageSize: 'phone',
     heroImage: {
       src: `${VVDN_IMG}/design-employee-login.png`,
@@ -572,12 +523,17 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        title: 'The project',
+        title: 'Overview',
         blocks: [
           {
             type: 'text',
             content:
-              'I interned at VVDN Technologies on the Cloud & Apps Engineering team. VVDN is a global product engineering company working across cloud, IoT, networking, and embedded systems. The internal brief was to replace the company\'s email-based survey workflow with a secure, mobile-first platform where HR could create, distribute, and analyse employee surveys. I built the prototype largely on my own, but had consistent support from mentors on the Cloud team through stand-ups, demos, and code review.',
+              'I interned at VVDN Technologies on the Cloud & Apps Engineering team from March to May 2024. The brief was to replace an email-based survey workflow with a mobile-first platform where HR could create, distribute, and collect employee surveys.',
+          },
+          {
+            type: 'text',
+            content:
+              'I built most of the prototype myself, with mentor support through stand-ups, demos, and code review. This was not a throwaway classroom exercise: after the internship, HR adopted the application, expanded it, and continues to use it internally.',
           },
         ],
       },
@@ -587,12 +543,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'I built a full-stack prototype from scratch using Flutter for the cross-platform mobile app and Django REST Framework for the backend API. The app supports separate admin and employee dashboards, user authentication, and multilingual survey delivery.',
-          },
-          {
-            type: 'text',
-            content:
-              'The interface was built for both Android and iOS from a single Flutter codebase. I worked through daily stand-ups and weekly demos with the Cloud team, iterating on feedback throughout the internship.',
+              'Flutter for Android and iOS from a shared codebase, with a Python Django REST Framework backend and PostgreSQL. Features included authentication, admin and employee dashboards, survey scheduling, file uploads, multilingual survey delivery, text-to-speech, and voice input.',
           },
           {
             type: 'image',
@@ -629,12 +580,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'The application was completed within the internship and adopted by VVDN\'s HR department. It has since been expanded and remains in active internal use. My performance evaluation rated Excellent across all criteria, including technical proficiency, communication, teamwork, and initiative.',
-          },
-          {
-            type: 'text',
-            content:
-              'Supervisor feedback highlighted completing the application from scratch, designing UI proactively ahead of schedule, and consistently delivering ahead of deadlines. This was my first experience shipping software that real users rely on day to day, even though it was a prototype.',
+              'HR adopted the application after the internship and has continued to expand it for internal use. I do not have public user counts or performance metrics to share. Supervisor feedback noted completing the application from scratch, designing UI ahead of schedule, and delivering on deadlines. My performance evaluation rated Excellent across the criteria used by the team.',
           },
         ],
       },
@@ -644,7 +590,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'Flutter, Django REST Framework, Python, PostgreSQL, and REST API design. CI/CD through GitHub Actions. The internship covered the full cycle from requirements gathering and API design through to demo and handover.',
+              'Flutter, Django REST Framework, Python, PostgreSQL, REST API design, and GitHub Actions CI/CD. The internship covered requirements, API design, implementation, demo, and handover.',
           },
         ],
       },
@@ -664,10 +610,10 @@ export const projects: Project[] = [
     dates: 'March 2023 to November 2025',
     segments: ['experience'],
     summary:
-      'Three years across DevSoc project teams, shipping student-facing apps used on campus. Freerooms and Unilectives as a frontend engineer, then Director on Bridges.',
+      'Three years with UNSW DevSoc: frontend contributor on Freerooms and Unilectives, then Director on Bridges. Bridges was leadership and coordination, not hands-on coding. I was not the sole developer of these products.',
     tags: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Leadership'],
     tileDescription:
-      'Freerooms, Unilectives, and Director on Bridges at DevSoc.',
+      'Freerooms, Unilectives, and Director on Bridges. Three years shipping student-facing apps at UNSW.',
     heroImage: {
       src: `${DEVSOC_IMG}/freerooms-landing.png`,
       alt: 'Freerooms landing page',
@@ -675,32 +621,22 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        title: 'Why DevSoc',
+        title: 'Overview',
         blocks: [
           {
             type: 'text',
             content:
-              'DevSoc runs like a small tech company inside UNSW. Real project teams, designers, HR, marketing, and code that actual students use. I joined in 2023 and spent three years across different project teams, from frontend contributor to director.',
-          },
-          {
-            type: 'text',
-            content:
-              'Most of my DevSoc work has been joining existing codebases and shipping features with a team, not building solo. That is a different skill, and honestly the more important one. I learned by watching how senior contributors reviewed my PRs, how designers thought about flows, and how teams disagreed productively before shipping.',
+              'DevSoc runs student project teams that ship apps used on campus. From March 2023 to November 2025 I progressed from frontend contributor to Director. Most of the work was joining existing codebases and shipping with a team, not building solo.',
           },
         ],
       },
       {
-        title: 'Freerooms',
+        title: 'Freerooms · March to December 2023 · Frontend contributor',
         blocks: [
           {
             type: 'text',
             content:
-              'Mar to Dec 2023 · Frontend Engineer. Freerooms shows you which classrooms are free on campus. It was my entry point into DevSoc and my first time touching a production app that other students actually opened on their phones between classes.',
-          },
-          {
-            type: 'text',
-            content:
-              'I redesigned and rebuilt the entire landing page, from design through to implementation. Hero, features, FAQ, sponsors, the full page. I also contributed to the broader Next.js migration and performance work across the app. It was the first time pull requests, code review, and shared design systems clicked for me.',
+              'Freerooms shows which classrooms are free on campus. I redesigned and rebuilt the landing page (hero, features, FAQ, sponsors) and contributed to the Next.js migration and performance work. It was my first production app with pull requests, code review, and a shared design system.',
           },
           {
             type: 'image',
@@ -711,17 +647,12 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Unilectives',
+        title: 'Unilectives · March to December 2024 · Frontend contributor',
         blocks: [
           {
             type: 'text',
             content:
-              'Mar to Dec 2024 · Frontend Engineer. Unilectives is DevSoc\'s course review platform, sponsored by Jane Street and TikTok. By the time I joined, it was already serving thousands of students. My job was to add to something that mattered, not start from zero.',
-          },
-          {
-            type: 'text',
-            content:
-              'I also designed sponsor placement layouts for the Unilectives homepage, fitting Jane Street, TikTok, and Macquarie branding into the existing UI without cluttering the page.',
+              'Unilectives is DevSoc\'s course review platform. I worked on sponsor layouts for Jane Street, TikTok, and Macquarie, contributed analytics so the team could see what students used, and helped ship Unilectives Wrapped. While I was on the team, the platform received more than 10,000 pageviews in one month.',
           },
           {
             type: 'image',
@@ -730,20 +661,10 @@ export const projects: Project[] = [
             caption: 'Sponsor layout explorations for the Unilectives homepage.',
           },
           {
-            type: 'text',
-            content:
-              'I set up analytics tracking so the team could see what students actually used and make decisions from real data.',
-          },
-          {
             type: 'image',
             src: `${DEVSOC_IMG}/unilectives-analytics.png`,
             alt: 'Plausible analytics dashboard for Unilectives showing 10k pageviews',
             caption: 'Over 10,000 pageviews in a single month while I was on the team.',
-          },
-          {
-            type: 'text',
-            content:
-              'I also helped ship Unilectives Wrapped, a year-in-review feature modelled on Spotify Wrapped. Picking your courses is stressful. Wrapped made the data feel fun instead of dry.',
           },
           {
             type: 'image',
@@ -760,28 +681,23 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: 'Bridges',
+        title: 'Bridges · January to November 2025 · Director',
         blocks: [
           {
             type: 'text',
             content:
-              'Jan to Nov 2025 · Director. Bridges is a platform to connect UNSW societies with industry sponsors. This one started from zero. Before any UI, we spent months on the idea itself: running surveys, talking to societies and sponsors, and doing proper requirements work to understand whether the problem was real and what a solution needed to look like.',
+              'Bridges connects UNSW societies with industry sponsors. I helped take the platform from zero to its first version. My role was leadership and coordination, not hands-on coding.',
           },
           {
             type: 'text',
             content:
-              'Design came last. The v1 screens were how we communicated what we believed the product should be, not where we started. My role was not to write the code myself. I led the team, helped others design and build, reviewed work, and stepped in only when someone needed support. The goal was to let people on the team do their best work and take ownership of what they shipped.',
+              'Before UI work, we spent months on requirements through surveys and interviews with societies and sponsors. As Director I led the team, reviewed work, and unblocked contributors. Version one supported browsing, society login, and onboarding, built by the developers and designers on the team.',
           },
           {
             type: 'image',
             src: `${DEVSOC_IMG}/bridges-browse.png`,
             alt: 'Bridges v1 browse partnerships page',
             caption: 'The v1 browse screen. Design as a shared picture of what the team was building toward.',
-          },
-          {
-            type: 'text',
-            content:
-              'Leading for the first time meant learning when to guide and when to get out of the way. Sprint planning, unblocking people, keeping design and engineering talking to each other. The v1 covered browse, society login, and onboarding, built by the developers and designers on the team. I was there to make sure we solved the right problem and that everyone had room to contribute.',
           },
           {
             type: 'image',
@@ -797,7 +713,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'DevSoc is where I learned that software is a team sport. Version control, CI/CD, code review, sprint planning, all of it in service of apps students actually use. Every project from Freerooms to Bridges marked a step up: first codebase, first feature at scale, first team to lead. I would not be where I am without the people who reviewed my code, pushed me to think bigger, and showed me what good collaboration looks like.',
+              'DevSoc is where version control, CI/CD, code review, and sprint planning became normal for me, in service of apps students actually use. Freerooms taught me an existing codebase. Unilectives taught me shipping features into something already scaled. Bridges taught me leading without needing to write every line.',
           },
         ],
       },
@@ -814,6 +730,53 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'patent-classification',
+    title: 'Teaching a small model to classify patents',
+    role: 'Research Assistant',
+    organisation: 'Trustworthy Digital Society (UNSW × UTS)',
+    dates: '2026 to present',
+    segments: ['experience'],
+    summary:
+      'Early-stage collaborative research on teaching a small local model to classify patents and explain its choice. Paper in progress. Not published and not production-ready.',
+    tags: ['Research', 'Machine Learning', 'LLMs', 'Python'],
+    tileDescription:
+      'Early-stage research on local patent classification with explanations. Paper in progress.',
+    sections: [
+      {
+        title: 'Overview',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'This is ongoing early-stage research with a colleague at Trustworthy Digital Society. Patent classification is slow expert work against a large hierarchy of codes. Large models can help, but they are expensive to run at scale, and patent applications often cannot be sent to external APIs.',
+          },
+          {
+            type: 'text',
+            content:
+              'The idea is a small model that can run locally, assign a code, and give a reason for it, using reasoning from a larger model as a teaching signal. The paper is still in progress. There are no published results yet, and the work is not a production system.',
+          },
+        ],
+      },
+      {
+        title: 'Status',
+        blocks: [
+          {
+            type: 'text',
+            content:
+              'More detail will go up when the paper is further along. Until then, treat this as research in progress rather than a finished case study.',
+          },
+        ],
+      },
+    ],
+    links: [
+      {
+        label: 'Trustworthy Digital Society',
+        href: TDS_URL,
+      },
+    ],
+    linksNote: 'Paper in progress. No public paper or demo yet.',
+  },
+  {
     slug: 'oshepro',
     title: 'Oshepro EHS Platform',
     role: 'UX Designer',
@@ -821,23 +784,28 @@ export const projects: Project[] = [
     dates: 'July to December 2023',
     segments: ['experience'],
     summary:
-      'I worked on Oshepro\'s core workflows so safety teams could complete forms properly without getting stuck in confusing UI.',
+      'UX Designer (July to December 2023), remote with a Phoenix team. Figma, prototypes, and UI documentation for three EHS modules used by non-technical field and safety teams in North America. This was UX design work, not software engineering or frontend implementation.',
     tileDescription:
-      'UX redesign across SHEMa, AMLA, and TRACI to make safety workflows clearer and easier to complete.',
-    tags: ['UX Design', 'Figma', 'Enterprise', 'Research', 'Prototyping'],
+      'UX redesign across SHEMa, AMLA, and TRACI so safety teams could complete forms without getting stuck.',
+    tags: ['UX Design', 'Figma', 'Enterprise', 'Prototyping'],
     sections: [
       {
-        title: 'The role',
+        title: 'Overview',
         blocks: [
           {
             type: 'text',
             content:
-              'Jul to Dec 2023 · Remote from Sydney, team based in Phoenix. Oshepro is an EHS platform for safety audits, risk assessments, and compliance reporting. The people using it are field workers and safety teams on job sites, not software people. They need to log hazards and close out tasks, then get back to work.',
+              'July to December 2023. Remote from Sydney with a team based in Phoenix. Oshepro is an EHS platform for safety audits, risk assessments, and compliance reporting. Users are non-technical field and safety teams in North America who need to log hazards and close out tasks, then get back to work.',
           },
           {
             type: 'text',
             content:
-              'The product had grown quickly, but the UX had not kept pace. Teams were doing safety-critical work in screens where navigation kept changing and controls behaved differently from one page to the next. I redesigned three connected parts of the same product: SHEMa (Safety, Health and Environmental Manager), AMLA (Accident Management and Loss Analysis), and TRACI (Task Risk Assessment, Control and Implementation).',
+              'My role was UX design only: Figma, prototypes, and UI documentation. I reviewed existing product workflows and user reviews. I did not conduct direct user interviews or shadow field teams, and I did not implement frontend code. Incomplete forms in this product create audit and safety risk, so clarity mattered more than visual polish.',
+          },
+          {
+            type: 'text',
+            content:
+              'I worked on three modules: SHEMa (Safety, Health and Environmental Manager), AMLA (Accident Management and Loss Analysis), and TRACI (Task Risk Assessment, Control and Implementation).',
           },
         ],
       },
@@ -847,21 +815,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'The big issue was simple: people were fighting the interface. Most users were non-technical field and safety teams, but the product expected them to navigate dense layouts and inconsistent interactions. Instead of focusing on the actual task, they first had to figure out what the screen was trying to do.',
-          },
-          {
-            type: 'text',
-            content:
-              'That led to real data quality problems. Required fields were missed, records were submitted half-finished, and teams could not trust that every entry was complete. In compliance software, that is not just annoying UX. It can create real safety and audit risk.',
-          },
-          {
-            type: 'bullets',
-            items: [
-              'Navigation changed across modules, so users could not build a reliable routine.',
-              'Controls looked similar but behaved differently, which led to avoidable mistakes.',
-              'Common tasks took too many clicks and had unclear next steps.',
-              'User reviews said the same thing: easy for some, too complicated for less technical users.',
-            ],
+              'People were fighting the interface. Navigation changed across modules, similar controls behaved differently, and common tasks took too many clicks. User reviews said the product was easy for some users and too complicated for less technical ones. Missed required fields and half-finished records were a data quality problem with real compliance consequences.',
           },
         ],
       },
@@ -871,22 +825,16 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'SHEMa was the module people touched most, so its issues were felt every day. On the surface it looked simple, but once users started creating tasks, the flow became confusing and easy to misread.',
+              'SHEMa was the module people touched most. I designed two competing flows, including accordion layouts, sticky navigation, colour-coded status, and standardised patterns, then pushed a clearer direction. Single-page layouts in these deliverables were design specifications, not implemented features.',
           },
           {
             type: 'bullets',
             items: [
-              'Next and Back did not always behave the way users expected, so people thought they had finished when they had not.',
-              'Entered text looked too similar to placeholder text, which made users doubt whether information was actually saved.',
-              'After creating a task, users were not guided cleanly back to the task list.',
-              'Task list actions were fiddly: small click targets, unclear sort arrows, and inconsistent permission visibility.',
-              'Sidebar behavior added friction with hidden navigation, small labels, and a default landing page that did not match the main user intent.',
+              'Next and Back behaviour was easy to misread, so people thought they had finished when they had not.',
+              'Entered text looked too similar to placeholder text.',
+              'After creating a task, return to the task list was unclear.',
+              'Small click targets and inconsistent permission visibility on the task list.',
             ],
-          },
-          {
-            type: 'text',
-            content:
-              'I designed two versions of the same SHEMa workflow, compared the tradeoffs, and then pushed a cleaner direction. The redesigned flow made progress visible, grouped related fields more clearly, and made navigation feel predictable from start to submit.',
           },
           {
             type: 'image',
@@ -914,22 +862,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'AMLA had a different problem. The form asked for important incident information, but the UI made people work too hard before they could even start thinking about the incident itself.',
-          },
-          {
-            type: 'bullets',
-            items: [
-              'Moving between tabs felt slower than it should have been.',
-              'Accordions depended on tiny click targets, so expanding sections was easy to miss.',
-              'Mixing MCQs and dropdowns made the interaction feel inconsistent.',
-              'Column-heavy layouts made forms feel more complicated than the task itself.',
-              'Some sections needed clearer grouping and more flexible root-cause input.',
-            ],
-          },
-          {
-            type: 'text',
-            content:
-              'I simplified AMLA into a more linear, consistent flow. Tabs and accordions became easier to interact with, input patterns were standardized, and the structure was cleaned up so users could complete incident forms with fewer second guesses.',
+              'AMLA asked for important incident information, but the UI made people work too hard before they could focus on the incident. I simplified it into a more linear, consistent flow with clearer section hierarchy and standardised inputs.',
           },
           {
             type: 'image',
@@ -951,22 +884,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'TRACI was naturally the most complex part of the product, but the interface made that complexity feel heavier than it needed to be. Hazard assessment screens were dense, nested, and easy to lose your place in.',
-          },
-          {
-            type: 'bullets',
-            items: [
-              'Nested tabs hid important sections, so users could miss key risk details.',
-              'Long checklists increased visual load and slowed repeated workflows.',
-              'Control behavior changed across tabs and fields, which reduced user confidence.',
-              'Some core dropdowns (plant, department, equipment) were unreliable, blocking key selections.',
-              'Risk summary and risk control information were grouped in ways that made review harder.',
-            ],
-          },
-          {
-            type: 'text',
-            content:
-              'I restructured TRACI into clearer task-level sections with stronger hierarchy and easier expansion. I also cleaned up checklist interactions, separated key risk views, and improved severity cues so high-risk items stand out quickly during review.',
+              'TRACI is the most complex module. Hazard screens were dense and nested. I restructured it into clearer task-level sections, cleaned up checklist interactions, and used colour-coded severity so high-risk items stand out during review.',
           },
           {
             type: 'image',
@@ -979,11 +897,6 @@ export const projects: Project[] = [
             src: `${OSHEPRO_IMG}/traci-risk-collapsed.png`,
             alt: 'TRACI risk assessment with collapsed task accordions',
             caption: 'Scan the task list, expand only what you need.',
-          },
-          {
-            type: 'text',
-            content:
-              'Expanded task views showed detail without overwhelming the page. Summary views used clear severity colors so high-risk items were obvious during review.',
           },
           {
             type: 'image',
@@ -1005,7 +918,7 @@ export const projects: Project[] = [
           {
             type: 'text',
             content:
-              'This project taught me what enterprise UX means in practice. In compliance products, good design is not about making screens look nice. It is about helping people enter the right information at the right time, with confidence.',
+              'In compliance products, design is about helping people enter the right information at the right time. This experience sits beside my engineering work as product thinking and UX ability, not as software implementation experience.',
           },
         ],
       },

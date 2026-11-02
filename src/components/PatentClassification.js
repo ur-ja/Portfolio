@@ -11,7 +11,7 @@ export default function PatentClassification() {
       size='wide'
       dates='2026 to present'
       title='Teaching a small model to classify patents'
-      description='Early-stage research on local patent classification with explanations. Paper in progress.'
+      description='Early-stage collaborative research. Paper in progress, not published yet.'
       footer='Research · LLMs · Python'
     />
   );
